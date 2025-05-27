@@ -2,54 +2,33 @@
 layout: default
 ---
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
+굵은 글씨는 **별표 두 개** 로 텍스트를 감싼다.
+이탤릭 서체는 _언더바_ 로 텍스트를 감싼다.
+취소선 처리는 ~~물결표~~ (물결표) 로 텍스트를 감싼다.
 
 [Link to another page](./another-page.html).
 
-There should be whitespace between paragraphs.
+# 머리글1 은 # 을 텍스트 앞 접두어로 사용하며 크기에 따라
+## 머리글2 은 ## 두 개
+### 머리글3 은 ### 세 개를 앞에 붙혀서 사용한다.
 
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
 
-# Header 1
-
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
-
-## Header 2
-
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
-
-### Header 3
+> 블록 처리는 해당 블록 앞에 > 를 붙힌다. 내려쓰기 시, 각 문장 마다 붙혀줘야 한다.
+> 여기 앞에도 꺽새 하나
+> 여기 앞에도 꺽새 하나 
 
 ```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
+ (이렇게) ```js
+  자바스크립트 코드는 백틱(Option + ~) 세 개 + js 와 백틱 세 개로 문장을 감싼다.
+  js 를 쓰지 않으면 javascript 하이라이트가 들어가지 않음.
+ var fun = function lang(l) {
+    dateformat.i18n = require('./lang/' + l)
+    return true;
+ }
+ (이렇게) ```
 ```
 
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
-
-#### Header 4
-
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-
-##### Header 5
-
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
-
-###### Header 6
+###### 테이블, 필요 시 raw Text 참조
 
 | head1        | head two          | three |
 |:-------------|:------------------|:------|
@@ -58,66 +37,13 @@ end
 | ok           | good `oreos`      | hmm   |
 | ok           | good `zoute` drop | yumm  |
 
-### There's a horizontal rule below this.
-
+줄 하나 긋기는 별표 세 개를 한 칸 씩 띄워서 쓰면 된다.(* * * 이렇게)
 * * *
 
-### Here is an unordered list:
-
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
-
-### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
-
-### And a nested list:
-
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-
-### Small image
+###### 작은 이미지 첨부
 
 ![Octocat](https://github.githubassets.com/images/icons/emoji/octocat.png)
 
-### Large image
+###### 큰 이미지 첨부
 
 ![Branching](https://guides.github.com/activities/hello-world/branching.png)
-
-
-### Definition lists can be used with HTML syntax.
-
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl>
-
-```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
-
-```
-The final element.
-```
