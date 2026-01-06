@@ -1,5 +1,4 @@
 ---
-layout: default
+layout: home
+title: My Blog
 ---
-
-> Clean Main Page
