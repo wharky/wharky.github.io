@@ -13,14 +13,14 @@ entries:
       category: tech # 카테고리명
       show_more: true # 더보기 기능 활성화 유무
       show_more_text: See more posts... # 더보기 버튼 텍스트
-      show_more_url: example2-archive.html # 더보기 HTML 파일명
+      show_more_url: archive-tech.html # 더보기 HTML 파일명
 
   - title: art
     post_list:
       category: art
       show_more: true
       show_more_text: See more posts...
-      show_more_url: example2-archive.html
+      show_more_url: archive-art.html
 
   - title: all posts
     post_list:
