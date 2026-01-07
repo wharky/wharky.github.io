@@ -1,12 +1,13 @@
 # https://github.com/riggraz/no-style-please#customize-the-menu
 
 entries:
-  - title: My
+  - title: about
     entries:
-      - title:
-      - title: github repo
-        url: https://github.com/riggraz/no-style-please
-      - title: "used by <a href='https://riggraz.dev'>riggraz.dev</a> and <a href='https://github.com/riggraz/no-style-please/network/dependents'>many others</a>"
+      - title: public personal db
+      - title: public personal db
+      # - title: current github repo
+      #  url: https://github.com/wharky/wharky.github.io
+      # - title: "used by <a href='https://riggraz.dev'>riggraz.dev</a> and <a href='https://github.com/riggraz/no-style-please/network/dependents'>many others</a>"
 
   - title: tech # 제목명
     post_list:
@@ -32,13 +33,13 @@ entries:
   - title: rss
     url: feed.xml
 
-  - title: another list
-    entries:
-      - title: with subitems
-        entries:
-          - title: with subsubitems
-          - title: example page
-            url: about
+  # - title: another list
+  #   entries:
+  #     - title: with subitems
+  #       entries:
+  #         - title: with subsubitems
+  #         - title: example page
+  #           url: about
 
   #- title: PRO TIP
   #  entries:
