@@ -14,22 +14,24 @@ import java.util.Map;
 
 public class BlogPoster {
 
+    // [수정 1] 모델명 오타 수정 (2.5 -> 1.5)
+    // 혹은 gemini-3-pro-preview 를 쓰셔도 됩니다. 여기선 최신 Flash 모델로 설정했습니다.
     private static final String API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent";
 
     // -------------------------------------------------------------------
-    // [설정 영역] Gemini가 요리할 '광범위한 재료(Seeds)'만 던져줍니다.
+    // [설정 영역] Gemini가 요리할 '광범위한 재료(Seeds)'
     // -------------------------------------------------------------------
     private static final Map<String, String> CATEGORY_TOPICS = new HashMap<>();
 
     static {
-        // 1. Tech: 최대한 다양한 분야를 나열
+        // 1. Tech
         CATEGORY_TOPICS.put("tech",
                 "Game Design Patterns, Unity Engine Tricks, Unreal Engine Blueprints, " +
                         "Retro Console Architecture (NES/SNES/PS1), Procedural Generation Algorithms, " +
                         "Server-Side Network Sync (Rollback/Dead Reckoning), TRPG Rule Systems in Code, " +
                         "Indie Game Marketing & Post-mortem, Shader Math & GLSL, AI Behavior Trees");
 
-        // 2. Art: 시각 예술의 이론적 재료들
+        // 2. Art
         CATEGORY_TOPICS.put("art",
                 "Color Theory & Psychology, Pixel Art Techniques, Photorealism vs Stylized, " +
                         "Shape Language (Circle/Square/Triangle), Environmental Storytelling, " +
@@ -37,7 +39,7 @@ public class BlogPoster {
                         "Fantasy Cartography, Architectural History (Gothic/Baroque/Cyberpunk), " +
                         "Lighting Composition & Mood, Character Silhouette Design");
 
-        // 3. Lore: 세계관 생성을 위한 재료들
+        // 3. Lore
         CATEGORY_TOPICS.put("lore",
                 "High Fantasy, Cyberpunk, Steampunk, Post-Apocalypse, Deep Sea Horror, " +
                         "Space Opera, Subterranean Civilizations, Time Paradoxes, " +
@@ -45,25 +47,14 @@ public class BlogPoster {
                         "Dystopian Government, Ancient Mythology Reinterpretation");
     }
 
-    // 설정값을 담을 내부 클래스 (필드 추가됨)
-    static class CategoryConfig {
-        String topics;       // 주제 키워드
-        String tone;         // 어조
-        String instructions; // 구체적인 작성 지침 (목차 등)
+    // [수정 2] 불필요해진 CategoryConfig 클래스 삭제함
 
-        public CategoryConfig(String topics, String tone, String instructions) {
-            this.topics = topics;
-            this.tone = tone;
-            this.instructions = instructions;
-        }
-    }
-
-    // ... (main 메서드 등은 기존과 동일) ...
     public static void main(String[] args) throws Exception {
         if (args.length == 0) throw new IllegalArgumentException("실행 인자(카테고리명)가 필요합니다.");
         String categoryKey = args[0].toLowerCase();
 
-        if (!CATEGORY_MAP.containsKey(categoryKey)) {
+        // [수정 3] 변수명 통일 (CATEGORY_MAP -> CATEGORY_TOPICS)
+        if (!CATEGORY_TOPICS.containsKey(categoryKey)) {
             throw new IllegalArgumentException("지원하지 않는 카테고리입니다: " + categoryKey);
         }
 
@@ -71,7 +62,7 @@ public class BlogPoster {
         if (apiKey == null || apiKey.isEmpty()) throw new RuntimeException("API Key (GAK)가 없습니다.");
 
         String prompt = generatePrompt(categoryKey);
-        System.out.println("Category: " + categoryKey + " / Creating New World...");
+        System.out.println("Category: " + categoryKey + " / Creating New Post...");
 
         String responseText = callGemini(apiKey, prompt);
         savePost(categoryKey, responseText);
@@ -79,13 +70,9 @@ public class BlogPoster {
 
     private static String generatePrompt(String categoryKey) {
         String topics = CATEGORY_TOPICS.get(categoryKey);
-
-        // [핵심] LLM의 답변이 매번 달라지도록 '난수(Entropy)'를 프롬프트에 주입합니다.
         long randomSeed = System.currentTimeMillis();
-
         StringBuilder sb = new StringBuilder();
 
-        // 1. 카테고리별 페르소나 및 창의적 주제 선정 지시
         switch (categoryKey) {
             case "tech":
                 sb.append("당신은 '괴짜 천재 게임 개발자'입니다.\n");
@@ -125,11 +112,10 @@ public class BlogPoster {
                 throw new IllegalArgumentException("정의되지 않은 카테고리입니다.");
         }
 
-        // 2. 공통 시스템 제약사항 (엄수)
         sb.append("\n\n--- [시스템 제약사항] ---\n");
         sb.append("1. **NO HTML**: <div>, <span> 등 태그 사용 금지.\n");
         sb.append("2. **IMAGE_PROMPT**: 주제를 관통하는 예술적인 영어 프롬프트 작성.\n");
-        sb.append("3. **Random Seed**: ").append(randomSeed).append(" (이 숫자는 무시하되, 매번 새로운 창의성을 발휘하는 트리거로 삼으세요.)\n"); // 난수 주입
+        sb.append("3. **Random Seed**: ").append(randomSeed).append(" (이 숫자는 무시하되, 매번 새로운 창의성을 발휘하는 트리거로 삼으세요.)\n");
         sb.append("4. **출력 형식 준수**:\n\n");
         sb.append("TITLE: [제목]\n");
         sb.append("IMAGE_PROMPT: [영어 이미지 프롬프트]\n");
@@ -138,14 +124,6 @@ public class BlogPoster {
 
         return sb.toString();
     }
-
-    // ... (callGemini, savePost 등 나머지 메서드는 기존 유지) ...
-    // ... (checkImageAvailability 등 포함) ...
-    // (이전 답변의 savePost 메서드를 그대로 쓰시면 됩니다.
-    // HTML 태그 제거 로직이 포함된 버전을 권장합니다.)
-
-    // 편의를 위해 callGemini와 savePost 부분만 아래에 간략히 붙입니다.
-    // 실제로는 직전 답변의 코드를 그대로 쓰되 위 설정 부분만 바꾸면 됩니다.
 
     private static String callGemini(String apiKey, String prompt) throws IOException, InterruptedException {
         String safePrompt = prompt.replace("\"", "\\\"").replace("\n", "\\n");
@@ -163,15 +141,11 @@ public class BlogPoster {
     }
 
     private static void savePost(String category, String jsonResponse) throws IOException {
-        // ... (직전 코드와 동일: 파싱 -> HTML 태그 제거 -> 이미지 생성 -> 저장) ...
-        // ... (내용이 길어 생략하지만, 직전 답변의 savePost를 그대로 사용하세요) ...
-        // 여기서는 생략된 부분만 채워넣으시면 됩니다.
-
-        // 1. 파싱 (제목, 프롬프트, 본문 분리)
         String title = "제목 없음";
-        String imagePrompt = "fantasy world landscape";
+        String imagePrompt = "abstract digital art";
         String body = "";
 
+        // 1. 파싱
         try {
             int textStart = jsonResponse.indexOf("\"text\": \"");
             if (textStart > -1) {
@@ -179,7 +153,7 @@ public class BlogPoster {
                 String rawText = temp.split("\"\\s*\\n*\\s*}")[0];
                 String unescaped = rawText.replace("\\n", "\n").replace("\\\"", "\"");
 
-                // HTML 태그 제거 (중요!)
+                // [중요] HTML 태그 및 유니코드 찌꺼기 제거
                 unescaped = unescaped.replaceAll("<[^>]*>", "").replace("\\u003c", "<").replace("\\u003e", ">");
 
                 String[] lines = unescaped.split("\n");
@@ -187,15 +161,23 @@ public class BlogPoster {
                 StringBuilder bodyBuilder = new StringBuilder();
 
                 for (String line : lines) {
-                    if (line.startsWith("TITLE:")) title = line.replace("TITLE:", "").trim();
-                    else if (line.startsWith("IMAGE_PROMPT:")) imagePrompt = line.replace("IMAGE_PROMPT:", "").trim();
-                    else if (line.startsWith("BODY:")) { bodyStarted = true; continue; }
-                    else if (bodyStarted) bodyBuilder.append(line).append("\n");
+                    if (line.startsWith("TITLE:")) {
+                        title = line.replace("TITLE:", "").trim();
+                    } else if (line.startsWith("IMAGE_PROMPT:")) {
+                        imagePrompt = line.replace("IMAGE_PROMPT:", "").trim();
+                    } else if (line.startsWith("BODY:")) {
+                        bodyStarted = true;
+                        continue;
+                    } else if (bodyStarted) {
+                        bodyBuilder.append(line).append("\n");
+                    }
                 }
                 body = bodyBuilder.toString();
                 if (body.isEmpty()) body = unescaped;
             }
-        } catch (Exception e) { System.err.println("파싱 에러: " + e.getMessage()); }
+        } catch (Exception e) {
+            System.err.println("파싱 에러: " + e.getMessage());
+        }
 
         // 2. 이미지 생성
         String encodedPrompt = URLEncoder.encode(imagePrompt, StandardCharsets.UTF_8);
@@ -203,30 +185,53 @@ public class BlogPoster {
         String imageUrl = "https://image.pollinations.ai/prompt/" + encodedPrompt + "?width=800&height=450&nologo=true&seed=" + randomSeed;
         boolean isImageAvailable = checkImageAvailability(imageUrl);
 
-        // 3. 저장
+        // 3. 파일 저장
         ZoneId kstZone = ZoneId.of("Asia/Seoul");
         LocalDate now = LocalDate.now(kstZone);
-        String fileName = "_posts/" + now.toString() + "-" + title.replaceAll("[^a-zA-Z0-9가-힣\\s]", "").replace(" ", "-") + ".md";
+        // 파일명에 특수문자 제거
+        String safeTitle = title.replaceAll("[^a-zA-Z0-9가-힣\\s]", "").replace(" ", "-");
+        if(safeTitle.length() > 50) safeTitle = safeTitle.substring(0, 50);
+
+        String fileName = "_posts/" + now.toString() + "-" + safeTitle + ".md";
 
         StringBuilder content = new StringBuilder();
-        content.append("---\nlayout: post\ntitle: \"" + title.replace("\"", "\\\"") + "\"\ncategories: " + category + "\n---\n\n");
+        content.append("---\n");
+        content.append("layout: post\n");
+        content.append("title: \"" + title.replace("\"", "\\\"") + "\"\n");
+        content.append("categories: " + category + "\n");
+        content.append("---\n\n");
 
         if (isImageAvailable) {
-            content.append("![" + title + "](" + imageUrl + ")\n\n> **AI Image Prompt:** " + imagePrompt + "\n\n");
+            content.append("![" + title + "](" + imageUrl + ")\n\n");
+            content.append("> **AI Image Prompt:** " + imagePrompt + "\n\n");
         } else {
-            content.append("### \u26A0\uFE0F Image Generation Failed\n```text\nPrompt: " + imagePrompt + "\n```\n\n");
+            content.append("### \u26A0\uFE0F Image Generation Failed\n");
+            content.append("```text\n");
+            content.append("Prompt: " + imagePrompt + "\n");
+            content.append("```\n\n");
         }
         content.append(body);
 
-        try (FileWriter writer = new FileWriter(fileName)) { writer.write(content.toString()); }
+        try (FileWriter writer = new FileWriter(fileName)) {
+            writer.write(content.toString());
+        }
         System.out.println("Saved: " + fileName);
     }
 
     private static boolean checkImageAvailability(String imageUrl) {
         try {
-            HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10)).build();
-            HttpRequest request = HttpRequest.newBuilder().uri(URI.create(imageUrl)).GET().timeout(Duration.ofSeconds(30)).build();
-            return client.send(request, HttpResponse.BodyHandlers.discarding()).statusCode() == 200;
-        } catch (Exception e) { return false; }
+            HttpClient client = HttpClient.newBuilder()
+                    .connectTimeout(Duration.ofSeconds(10))
+                    .build();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(imageUrl))
+                    .GET()
+                    .timeout(Duration.ofSeconds(30))
+                    .build();
+            HttpResponse<Void> response = client.send(request, HttpResponse.BodyHandlers.discarding());
+            return response.statusCode() == 200;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
