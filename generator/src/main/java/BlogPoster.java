@@ -17,63 +17,32 @@ public class BlogPoster {
     private static final String API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent";
 
     // -------------------------------------------------------------------
-    // [설정 영역]
+    // [설정 영역] Gemini가 요리할 '광범위한 재료(Seeds)'만 던져줍니다.
     // -------------------------------------------------------------------
-    private static final Map<String, CategoryConfig> CATEGORY_MAP = new HashMap<>();
+    private static final Map<String, String> CATEGORY_TOPICS = new HashMap<>();
 
     static {
-        // 1. Tech 설정
-        CATEGORY_MAP.put("tech", new CategoryConfig(
-                "Game Development Patterns, Unity/Unreal Optimization, " +
-                "Retro Game Architecture (NES/SNES), Procedural Content Generation, " +
-                "Game Server Sync (Dead Reckoning), TRPG Rule Logic in Code, " +
-                "Indie Game Post-mortem, Shader Programming", // 주제
+        // 1. Tech: 최대한 다양한 분야를 나열
+        CATEGORY_TOPICS.put("tech",
+                "Game Design Patterns, Unity Engine Tricks, Unreal Engine Blueprints, " +
+                        "Retro Console Architecture (NES/SNES/PS1), Procedural Generation Algorithms, " +
+                        "Server-Side Network Sync (Rollback/Dead Reckoning), TRPG Rule Systems in Code, " +
+                        "Indie Game Marketing & Post-mortem, Shader Math & GLSL, AI Behavior Trees");
 
-                "10년 차 시니어 개발자가 후배에게 설명하는 깊이 있고 분석적인 톤.", // 톤
+        // 2. Art: 시각 예술의 이론적 재료들
+        CATEGORY_TOPICS.put("art",
+                "Color Theory & Psychology, Pixel Art Techniques, Photorealism vs Stylized, " +
+                        "Shape Language (Circle/Square/Triangle), Environmental Storytelling, " +
+                        "UI/UX Design Philosophy (Diegetic/Meta), The Uncanny Valley, " +
+                        "Fantasy Cartography, Architectural History (Gothic/Baroque/Cyberpunk), " +
+                        "Lighting Composition & Mood, Character Silhouette Design");
 
-                "게임과 개발을 좋아하는 선배가 친근하고 재미있게 설명하는 분위기." // 추가 지침
-        ));
-
-        // 2. Art 설정 (범주 확장: 특정 게임 -> 예술 이론 및 시각적 스토리텔링 전반)
-        CATEGORY_MAP.put("art", new CategoryConfig(
-                // 주제: 게임/판타지 아트의 거시적인 이론과 역사, 미학을 다루도록 키워드 확장
-                "Color Psychology in Game Design, The Evolution of Pixel Art to Photorealism, " +
-                "Shape Language in Character Design (Round vs Sharp), " +
-                "Environmental Storytelling: How Level Design Tells a Story, " +
-                "UI/UX Aesthetics: Diegetic vs Non-Diegetic Interfaces, " +
-                "The Aesthetics of Horror: Uncanny Valley & Liminal Spaces, " +
-                "Fantasy Cartography & Map Making Art, " +
-                "Architectural Styles in Video Games (Gothic, Brutalist, Cyberpunk), " +
-                "The Philosophy of Lighting and Mood",
-
-                // 톤: 아트 디렉터(Art Director)나 시각 디자인 교수가 강의하는 톤
-                "아트 디렉터가 지망생들에게 '보는 법'을 가르쳐주는 듯한 통찰력 있는 톤. " +
-                "단순한 감상이 아니라, 시각적 요소가 어떻게 심리적 효과를 내는지 분석적으로 접근.",
-
-                // 지침: 이미지가 없어도 이해되도록 '이론'과 '심리'에 집중
-                "작성 시 다음 원칙을 반드시 지키세요:\n" +
-                "1. **시각적 묘사보다는 '이론'과 '의도'에 집중**: '무엇이 그려져 있나'보다 '왜 그렇게 디자인했나'를 설명하세요.\n" +
-                "2. **보편적인 예시 활용**: 특정 게임 하나만 파고들기보다, 여러 장르를 아우르는 공통적인 법칙(예: 색채 심리학, 조형 언어)을 논하세요.\n" +
-                "3. **게이머/창작자 관점**: 이 글을 읽는 독자가 게임을 하거나 TRPG를 할 때, '아, 이게 그래서 이렇게 생겼구나!'라고 깨닫게 만드세요.\n" +
-                "4. **이미지 의존도 낮추기**: 텍스트만으로도 충분히 상상력이 자극되도록, 추상적인 개념(공포, 평화, 긴장감)과 시각적 요소의 관계를 서술하세요."
-        ));
-
-        // 3. [New] Lore (세계관) 설정
-        CATEGORY_MAP.put("lore", new CategoryConfig(
-                "High Fantasy, Cyberpunk Dystopia, Steampunk Floating Islands, " +
-                "Post-Apocalyptic Overgrown Cities, Deep Sea Civilization, " +
-                "Cosmic Horror Space Opera, Subterranean Kingdom, Time-Loop World," +
-                "Classic Space Opera TRPG Base",
-
-                "전지전능한 창조주(Creator) 혹은 고대 도서관의 기록관이 비사를 읊어주는 듯한 장엄하고 신비로운 톤. 어느 정도 유머러스함도 있음",
-
-                // 여기가 핵심입니다! (필수 포함 요소 지정)
-                "반드시 다음 4가지 목차를 포함하여 작성하세요:\n" +
-                "1. **세계의 기원과 설정**: 이 세계가 어떻게 탄생했는지, 마법이나 기술의 수준은 어떤지.\n" +
-                "2. **환경과 기후**: 독특한 날씨, 지형, 생태계 묘사.\n" +
-                "3. **주요 종족과 문화**: 인간 외의 독창적인 종족들과 그들의 식생, 신앙, 갈등.\n" +
-                "4. **충격적인 반전 요소**: 이 세계관의 사람들이 모르고 있는 비밀이나, 역사의 진실 (Plot Twist)."
-        ));
+        // 3. Lore: 세계관 생성을 위한 재료들
+        CATEGORY_TOPICS.put("lore",
+                "High Fantasy, Cyberpunk, Steampunk, Post-Apocalypse, Deep Sea Horror, " +
+                        "Space Opera, Subterranean Civilizations, Time Paradoxes, " +
+                        "Eldritch Gods, Artificial Intelligence Society, Magical Realism, " +
+                        "Dystopian Government, Ancient Mythology Reinterpretation");
     }
 
     // 설정값을 담을 내부 클래스 (필드 추가됨)
@@ -108,42 +77,66 @@ public class BlogPoster {
         savePost(categoryKey, responseText);
     }
 
-    // ... (generatePrompt 메서드 수정됨) ...
     private static String generatePrompt(String categoryKey) {
-        CategoryConfig config = CATEGORY_MAP.get(categoryKey);
+        String topics = CATEGORY_TOPICS.get(categoryKey);
 
-        return "당신은 해당 분야에서 가장 존경받는 '전설적인 에디터'이자 '심층 분석가'입니다.\n" +
-                "단순한 정보 나열이나 겉핥기 식의 글은 독자들에게 외면받습니다.\n" +
-                "아래 [제공된 재료]를 바탕으로, 독자의 지적 호기심을 자극하고 영감을 주는 '마스터피스(Masterpiece)'를 작성하세요.\n\n" +
+        // [핵심] LLM의 답변이 매번 달라지도록 '난수(Entropy)'를 프롬프트에 주입합니다.
+        long randomSeed = System.currentTimeMillis();
 
-                "--- [제공된 재료] ---\n" +
-                "1. **핵심 키워드(Seeds)**: " + config.topics + "\n" +
-                "   (위 키워드 중 1~2개를 선택하거나 창의적으로 연결하여 독창적인 주제를 선정하세요.)\n" +
-                "2. **글의 어조(Tone)**: " + config.tone + "\n" +
-                "3. **필수 미션**: " + config.instructions + "\n\n" +
+        StringBuilder sb = new StringBuilder();
 
-                "--- [작성 가이드라인] ---\n" +
-                "1. **도발적인 도입부**: 뻔한 정의(Definition)로 시작하지 마세요. 질문을 던지거나, 통념을 깨는 문장으로 시작하여 독자를 사로잡으세요.\n" +
-                "2. **깊이 있는 본문(Deep Dive)**:\n" +
-                "   - '무엇(What)'보다 **'왜(Why)'**와 **'어떻게(How)'**에 집중하세요.\n" +
-                "   - 추상적인 설명 대신, 구체적인 예시(게임 타이틀, 역사적 사건, 기술적 사례)를 반드시 드세요.\n" +
-                "   - 필요하다면 비유와 은유를 사용하여 복잡한 개념을 명쾌하게 설명하세요.\n" +
-                "3. **구조적인 마크다운**: 긴 글을 읽기 편하게 만드세요.\n" +
-                "   - **소제목(##)**을 적절히 배치하여 호흡을 조절하세요.\n" +
-                "   - **강조(**굵게**)**, **리스트(-)**, **인용문(>)**을 적극 활용하세요.\n" +
-                "   - 기술적인 내용이 있다면 **코드 블록(```)**을 사용하여 전문성을 드러내세요.\n" +
-                "4. **여운이 남는 결론**: 단순 요약이 아니라, 독자에게 생각할 거리를 던지거나 행동을 촉구하며 마무리하세요.\n\n" +
+        // 1. 카테고리별 페르소나 및 창의적 주제 선정 지시
+        switch (categoryKey) {
+            case "tech":
+                sb.append("당신은 '괴짜 천재 게임 개발자'입니다.\n");
+                sb.append("아래 [재료 키워드]들을 살펴보고, 그 중 2~3가지를 독창적으로 결합하여 **아주 구체적이고(Niche) 실무적인 주제** 하나를 선정하세요.\n");
+                sb.append("예를 들어, 단순히 '유니티'가 아니라 '유니티에서 젤다의 전설 식의 툰 쉐이딩을 구현하는 3가지 트릭' 처럼 구체적이어야 합니다.\n\n");
+                sb.append("[재료 키워드]: ").append(topics).append("\n\n");
+                sb.append("--- [Tech 작성 미션] ---\n");
+                sb.append("1. **Deep Dive**: 겉핥기 식 정보는 금지합니다. 원리를 파고드세요.\n");
+                sb.append("2. **Code & Logic**: 개발자들을 위해 의사코드(Pseudo-code)나 알고리즘 로직을 반드시 포함하세요.\n");
+                sb.append("3. **Wit**: 딱딱하지 않게, 개발자 유머를 섞어 작성하세요.\n");
+                break;
 
-                "--- [시스템 제약사항 (엄수)] ---\n" +
-                "1. **NO HTML**: <div>, <span>, <font> 등 HTML 태그와 색상 코드를 절대 사용하지 마세요.\n" +
-                "2. **IMAGE_PROMPT**: 글의 주제를 가장 상징적으로 보여주는 '예술 작품'을 생성할 수 있도록,\n" +
-                "   반드시 **영어(English)**로 작성하세요. (조명, 화풍, 구도, 질감 등을 매우 구체적으로 묘사)\n" +
-                "3. **출력 형식 유지**: 아래 형식을 토씨 하나 틀리지 않고 지키세요.\n\n" +
+            case "art":
+                sb.append("당신은 '게임 미학(Game Aesthetics) 연구가'입니다.\n");
+                sb.append("아래 [재료 키워드]를 바탕으로, 우리가 무심코 지나쳤던 시각적 요소의 **숨겨진 의도나 심리학적 원리**를 분석하는 주제를 선정하세요.\n");
+                sb.append("단순히 '예쁘다'가 아니라, '왜 이 공포 게임은 녹색 조명을 썼는가?' 처럼 **'Why'**에 집중해야 합니다.\n\n");
+                sb.append("[재료 키워드]: ").append(topics).append("\n\n");
+                sb.append("--- [Art 작성 미션] ---\n");
+                sb.append("1. **이미지 없이 보는 법**: 텍스트만 읽어도 장면이 상상되도록, 이론(색채학, 구도 등)을 들어 설명하세요.\n");
+                sb.append("2. **비교 분석**: 유명한 게임이나 예술 작품을 예시로 들어 설명하세요.\n");
+                sb.append("3. **통찰력**: 독자가 게임을 보는 눈을 높여주세요.\n");
+                break;
 
-                "TITLE: [여기에 제목]\n" +
-                "IMAGE_PROMPT: [여기에 영어 이미지 프롬프트]\n" +
-                "BODY:\n" +
-                "[여기에 본문 내용]";
+            case "lore":
+                sb.append("당신은 '무한한 차원의 기록관(Archivist)'입니다.\n");
+                sb.append("아래 [재료 키워드]를 믹스 앤 매치(Mix & Match)하여, **지금껏 어디서도 본 적 없는 새로운 세계관**을 즉석에서 창조하세요.\n");
+                sb.append("클리셰를 비틀어야 합니다. (예: '마법이 있는 사이버펑크', '물이 없는 심해 문명' 등)\n\n");
+                sb.append("[재료 키워드]: ").append(topics).append("\n\n");
+                sb.append("--- [Lore 작성 미션 (목차 준수)] ---\n");
+                sb.append("1. **기원(Origins)**: 이 세계가 뒤틀리거나 탄생한 결정적 사건.\n");
+                sb.append("2. **환경(Environment)**: 기괴하거나 아름다운 지형과 날씨.\n");
+                sb.append("3. **생태계(Ecosystem)**: 그곳에 적응해 사는 독특한 생물이나 종족.\n");
+                sb.append("4. **비밀(The Secret)**: 이 세계를 관통하는 충격적인 반전.\n");
+                break;
+
+            default:
+                throw new IllegalArgumentException("정의되지 않은 카테고리입니다.");
+        }
+
+        // 2. 공통 시스템 제약사항 (엄수)
+        sb.append("\n\n--- [시스템 제약사항] ---\n");
+        sb.append("1. **NO HTML**: <div>, <span> 등 태그 사용 금지.\n");
+        sb.append("2. **IMAGE_PROMPT**: 주제를 관통하는 예술적인 영어 프롬프트 작성.\n");
+        sb.append("3. **Random Seed**: ").append(randomSeed).append(" (이 숫자는 무시하되, 매번 새로운 창의성을 발휘하는 트리거로 삼으세요.)\n"); // 난수 주입
+        sb.append("4. **출력 형식 준수**:\n\n");
+        sb.append("TITLE: [제목]\n");
+        sb.append("IMAGE_PROMPT: [영어 이미지 프롬프트]\n");
+        sb.append("BODY:\n");
+        sb.append("[본문 내용]");
+
+        return sb.toString();
     }
 
     // ... (callGemini, savePost 등 나머지 메서드는 기존 유지) ...
