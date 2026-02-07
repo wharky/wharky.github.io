@@ -28,7 +28,7 @@ entries:
       category: lore
       show_more: true
       show_more_text: See more posts..
-      show_more_url: archive.html
+      show_more_url: archive-lore.html
 
   - title: all posts
     post_list:
