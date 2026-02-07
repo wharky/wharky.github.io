@@ -22,7 +22,7 @@ jobs:
 
       - name: Run Lore Generator
         env:
-          GAK: ${{ secrets.GEMINI_API_KEY }}
+          GAK: ${{ secrets.GAK }}
         # 인자로 'lore'를 넘겨줍니다.
         run: java generator/src/main/java/BlogPoster.java lore
 
