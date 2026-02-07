@@ -12,6 +12,7 @@ entries:
   - title: tech # 제목명
     post_list:
       category: tech # 카테고리명
+      limit: 5
       show_more: true # 더보기 기능 활성화 유무
       show_more_text: See more posts... # 더보기 버튼 텍스트
       show_more_url: archive-tech.html # 더보기 HTML 파일명
@@ -19,6 +20,7 @@ entries:
   - title: art
     post_list:
       category: art
+      limit: 5
       show_more: true
       show_more_text: See more posts...
       show_more_url: archive-art.html
@@ -26,6 +28,7 @@ entries:
   - title: lore
     post_list:
       category: lore
+      limit: 5
       show_more: true
       show_more_text: See more posts...
       show_more_url: archive-lore.html
