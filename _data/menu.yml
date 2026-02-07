@@ -9,20 +9,20 @@ entries:
       #  url: https://github.com/wharky/wharky.github.io
       # - title: "used by <a href='https://riggraz.dev'>riggraz.dev</a> and <a href='https://github.com/riggraz/no-style-please/network/dependents'>many others</a>"
 
-  - title: tech # 제목명
+  - title: tech
     post_list:
-      category: tech # 카테고리명
+      category: tech
       limit: 5
-      show_more: true # 더보기 기능 활성화 유무
-      show_more_text: See more posts... # 더보기 버튼 텍스트
-      show_more_url: archive-tech.html # 더보기 HTML 파일명
+      show_more: true
+      show_more_text: See more posts..
+      show_more_url: archive-tech.html
 
   - title: art
     post_list:
       category: art
       limit: 5
       show_more: true
-      show_more_text: See more posts...
+      show_more_text: See more posts..
       show_more_url: archive-art.html
 
   - title: lore
@@ -30,14 +30,14 @@ entries:
       category: lore
       limit: 5
       show_more: true
-      show_more_text: See more posts...
+      show_more_text: See more posts..
       show_more_url: archive-lore.html
 
   - title: all posts
     post_list:
       limit: 5
       show_more: true
-      show_more_text: See archive...
+      show_more_text: See archive..
       show_more_url: archive.html
 
   - title: rss
