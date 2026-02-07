@@ -25,41 +25,54 @@ public class BlogPoster {
         // 1. Tech 설정
         CATEGORY_MAP.put("tech", new CategoryConfig(
                 "Game Development Patterns, Unity/Unreal Optimization, " +
-                        "Retro Game Architecture (NES/SNES), Procedural Content Generation, " +
-                        "Game Server Sync (Dead Reckoning), TRPG Rule Logic in Code, " +
-                        "Indie Game Post-mortem, Shader Programming", // 주제
+                "Retro Game Architecture (NES/SNES), Procedural Content Generation, " +
+                "Game Server Sync (Dead Reckoning), TRPG Rule Logic in Code, " +
+                "Indie Game Post-mortem, Shader Programming", // 주제
 
                 "10년 차 시니어 개발자가 후배에게 설명하는 깊이 있고 분석적인 톤.", // 톤
 
-                "소제목을 활용하여 기술적인 원리를 단계별로 설명하세요. 코드 예시가 있다면 포함하세요." // 추가 지침
+                "게임과 개발을 좋아하는 선배가 친근하고 재미있게 설명하는 분위기." // 추가 지침
         ));
 
-        // 2. Art 설정
+        // 2. Art 설정 (범주 확장: 특정 게임 -> 예술 이론 및 시각적 스토리텔링 전반)
         CATEGORY_MAP.put("art", new CategoryConfig(
-                "Magic: The Gathering Color Philosophy, Elden Ring Environmental Storytelling, " +
-                        "Lovecraftian Cosmic Horror Art, Pixel Art Aesthetics, " +
-                        "Dark Fantasy Concept Art, Classical TRPG Bestiary Art Styles",
+                // 주제: 게임/판타지 아트의 거시적인 이론과 역사, 미학을 다루도록 키워드 확장
+                "Color Psychology in Game Design, The Evolution of Pixel Art to Photorealism, " +
+                "Shape Language in Character Design (Round vs Sharp), " +
+                "Environmental Storytelling: How Level Design Tells a Story, " +
+                "UI/UX Aesthetics: Diegetic vs Non-Diegetic Interfaces, " +
+                "The Aesthetics of Horror: Uncanny Valley & Liminal Spaces, " +
+                "Fantasy Cartography & Map Making Art, " +
+                "Architectural Styles in Video Games (Gothic, Brutalist, Cyberpunk), " +
+                "The Philosophy of Lighting and Mood",
 
-                "미학적이고 철학적인 톤. 갤러리 큐레이터나 판타지 세계의 현자가 설명하듯이.",
+                // 톤: 아트 디렉터(Art Director)나 시각 디자인 교수가 강의하는 톤
+                "아트 디렉터가 지망생들에게 '보는 법'을 가르쳐주는 듯한 통찰력 있는 톤. " +
+                "단순한 감상이 아니라, 시각적 요소가 어떻게 심리적 효과를 내는지 분석적으로 접근.",
 
-                "작품의 시각적 요소(색감, 구도)와 그 안에 담긴 의도를 해석하는 데 집중하세요."
+                // 지침: 이미지가 없어도 이해되도록 '이론'과 '심리'에 집중
+                "작성 시 다음 원칙을 반드시 지키세요:\n" +
+                "1. **시각적 묘사보다는 '이론'과 '의도'에 집중**: '무엇이 그려져 있나'보다 '왜 그렇게 디자인했나'를 설명하세요.\n" +
+                "2. **보편적인 예시 활용**: 특정 게임 하나만 파고들기보다, 여러 장르를 아우르는 공통적인 법칙(예: 색채 심리학, 조형 언어)을 논하세요.\n" +
+                "3. **게이머/창작자 관점**: 이 글을 읽는 독자가 게임을 하거나 TRPG를 할 때, '아, 이게 그래서 이렇게 생겼구나!'라고 깨닫게 만드세요.\n" +
+                "4. **이미지 의존도 낮추기**: 텍스트만으로도 충분히 상상력이 자극되도록, 추상적인 개념(공포, 평화, 긴장감)과 시각적 요소의 관계를 서술하세요."
         ));
 
         // 3. [New] Lore (세계관) 설정
         CATEGORY_MAP.put("lore", new CategoryConfig(
                 "High Fantasy, Cyberpunk Dystopia, Steampunk Floating Islands, " +
-                        "Post-Apocalyptic Overgrown Cities, Deep Sea Civilization, " +
-                        "Cosmic Horror Space Opera, Subterranean Kingdom, Time-Loop World," +
-                        "Classic Space Opera TRPG Base",
+                "Post-Apocalyptic Overgrown Cities, Deep Sea Civilization, " +
+                "Cosmic Horror Space Opera, Subterranean Kingdom, Time-Loop World," +
+                "Classic Space Opera TRPG Base",
 
-                "전지전능한 창조주(Creator) 혹은 고대 도서관의 기록관이 비사를 읊어주는 듯한 장엄하고 신비로운 톤.",
+                "전지전능한 창조주(Creator) 혹은 고대 도서관의 기록관이 비사를 읊어주는 듯한 장엄하고 신비로운 톤. 어느 정도 유머러스함도 있음",
 
                 // 여기가 핵심입니다! (필수 포함 요소 지정)
                 "반드시 다음 4가지 목차를 포함하여 작성하세요:\n" +
-                        "1. **세계의 기원과 설정**: 이 세계가 어떻게 탄생했는지, 마법이나 기술의 수준은 어떤지.\n" +
-                        "2. **환경과 기후**: 독특한 날씨, 지형, 생태계 묘사.\n" +
-                        "3. **주요 종족과 문화**: 인간 외의 독창적인 종족들과 그들의 식생, 신앙, 갈등.\n" +
-                        "4. **충격적인 반전 요소**: 이 세계관의 사람들이 모르고 있는 비밀이나, 역사의 진실 (Plot Twist)."
+                "1. **세계의 기원과 설정**: 이 세계가 어떻게 탄생했는지, 마법이나 기술의 수준은 어떤지.\n" +
+                "2. **환경과 기후**: 독특한 날씨, 지형, 생태계 묘사.\n" +
+                "3. **주요 종족과 문화**: 인간 외의 독창적인 종족들과 그들의 식생, 신앙, 갈등.\n" +
+                "4. **충격적인 반전 요소**: 이 세계관의 사람들이 모르고 있는 비밀이나, 역사의 진실 (Plot Twist)."
         ));
     }
 
@@ -99,27 +112,38 @@ public class BlogPoster {
     private static String generatePrompt(String categoryKey) {
         CategoryConfig config = CATEGORY_MAP.get(categoryKey);
 
-        return "당신은 해당 분야의 최고의 전문가이자 창작자입니다.\n" +
-                "아래 제공된 [키워드 목록] 중 하나를 랜덤으로 선택하거나 조합하여, " +
-                "오늘 독자들에게 선보일 가장 독창적인 콘텐츠를 생성하세요.\n\n" +
+        return "당신은 해당 분야에서 가장 존경받는 '전설적인 에디터'이자 '심층 분석가'입니다.\n" +
+                "단순한 정보 나열이나 겉핥기 식의 글은 독자들에게 외면받습니다.\n" +
+                "아래 [제공된 재료]를 바탕으로, 독자의 지적 호기심을 자극하고 영감을 주는 '마스터피스(Masterpiece)'를 작성하세요.\n\n" +
 
-                "[키워드 목록]: " + config.topics + "\n" +
-                "[글의 톤앤매너]: " + config.tone + "\n\n" +
+                "--- [제공된 재료] ---\n" +
+                "1. **핵심 키워드(Seeds)**: " + config.topics + "\n" +
+                "   (위 키워드 중 1~2개를 선택하거나 창의적으로 연결하여 독창적인 주제를 선정하세요.)\n" +
+                "2. **글의 어조(Tone)**: " + config.tone + "\n" +
+                "3. **필수 미션**: " + config.instructions + "\n\n" +
 
-                "[필수 작성 지침]:\n" + config.instructions + "\n\n" + // 여기가 추가됨
+                "--- [작성 가이드라인] ---\n" +
+                "1. **도발적인 도입부**: 뻔한 정의(Definition)로 시작하지 마세요. 질문을 던지거나, 통념을 깨는 문장으로 시작하여 독자를 사로잡으세요.\n" +
+                "2. **깊이 있는 본문(Deep Dive)**:\n" +
+                "   - '무엇(What)'보다 **'왜(Why)'**와 **'어떻게(How)'**에 집중하세요.\n" +
+                "   - 추상적인 설명 대신, 구체적인 예시(게임 타이틀, 역사적 사건, 기술적 사례)를 반드시 드세요.\n" +
+                "   - 필요하다면 비유와 은유를 사용하여 복잡한 개념을 명쾌하게 설명하세요.\n" +
+                "3. **구조적인 마크다운**: 긴 글을 읽기 편하게 만드세요.\n" +
+                "   - **소제목(##)**을 적절히 배치하여 호흡을 조절하세요.\n" +
+                "   - **강조(**굵게**)**, **리스트(-)**, **인용문(>)**을 적극 활용하세요.\n" +
+                "   - 기술적인 내용이 있다면 **코드 블록(```)**을 사용하여 전문성을 드러내세요.\n" +
+                "4. **여운이 남는 결론**: 단순 요약이 아니라, 독자에게 생각할 거리를 던지거나 행동을 촉구하며 마무리하세요.\n\n" +
 
-                "작성 규칙을 엄격히 준수하세요:\n" +
-                "1. TITLE: 내용을 관통하는 매력적인 제목을 지으세요.\n" +
-                "2. IMAGE_PROMPT: 글의 분위기를 완벽하게 표현하는 예술적인 영어 프롬프트를 작성하세요. (구체적인 조명, 스타일 묘사 필수)\n" +
-                "3. BODY: 오직 '표준 마크다운(Markdown)' 문법만 사용하세요.\n" +
-                "   - ❌ 금지: HTML 태그, 색상 코드 절대 금지.\n" +
-                "   - ✅ 권장: 소제목(#), 굵게(**), 리스트(-) 활용.\n\n" +
+                "--- [시스템 제약사항 (엄수)] ---\n" +
+                "1. **NO HTML**: <div>, <span>, <font> 등 HTML 태그와 색상 코드를 절대 사용하지 마세요.\n" +
+                "2. **IMAGE_PROMPT**: 글의 주제를 가장 상징적으로 보여주는 '예술 작품'을 생성할 수 있도록,\n" +
+                "   반드시 **영어(English)**로 작성하세요. (조명, 화풍, 구도, 질감 등을 매우 구체적으로 묘사)\n" +
+                "3. **출력 형식 유지**: 아래 형식을 토씨 하나 틀리지 않고 지키세요.\n\n" +
 
-                "출력 형식:\n" +
-                "TITLE: [제목]\n" +
-                "IMAGE_PROMPT: [영어 이미지 프롬프트]\n" +
+                "TITLE: [여기에 제목]\n" +
+                "IMAGE_PROMPT: [여기에 영어 이미지 프롬프트]\n" +
                 "BODY:\n" +
-                "[본문 내용]";
+                "[여기에 본문 내용]";
     }
 
     // ... (callGemini, savePost 등 나머지 메서드는 기존 유지) ...
