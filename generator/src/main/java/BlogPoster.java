@@ -38,7 +38,7 @@ public class BlogPoster {
         // 2. Art: 세계관과 미학, 철학을 요구
         CATEGORY_MAP.put("art", new CategoryConfig(
                 // 주제(Seeds)
-                "Magic: The Gathering Color Philosophy, Elden Ring Environmental Storytelling, " +
+                "World of Magic The Gathering, Elden Ring Environmental Storytelling, " +
                         "Lovecraftian Cosmic Horror Art, Pixel Art Aesthetics & Limitations, " +
                         "Dark Fantasy Concept Art, Classical TRPG Bestiary Art Styles, " +
                         "Visual Storytelling in UI Design, Glitch Art & Cyberpunk Aesthetics",
@@ -89,22 +89,25 @@ public class BlogPoster {
 
         String baseRequest =
                 "당신은 해당 분야의 깊은 지식을 가진 전문가(Nerd/Geek) 블로거입니다.\n" +
-                "아래 제공된 [키워드 목록]을 바탕으로, 오늘 독자들에게 들려줄 가장 흥미롭고 구체적인 주제 하나를 스스로 선정하세요.\n" +
-                "뻔하거나 일반적인 내용은 피하고, 당신만의 독창적인 시각이나 깊이 있는 분석이 담긴 주제여야 합니다.\n\n" +
+                        "아래 제공된 [키워드 목록]을 바탕으로, 오늘 독자들에게 들려줄 가장 흥미롭고 구체적인 주제 하나를 스스로 선정하세요.\n" +
+                        "뻔하거나 일반적인 내용은 피하고, 당신만의 독창적인 시각이나 깊이 있는 분석이 담긴 주제여야 합니다.\n\n" +
 
-                "[키워드 목록]: " + config.topics + "\n" +
-                "[글의 톤앤매너]: " + config.tone + "\n\n" +
+                        "[키워드 목록]: " + config.topics + "\n" +
+                        "[글의 톤앤매너]: " + config.tone + "\n\n" +
 
-                "작성 규칙을 엄격히 준수하세요:\n" +
-                "1. TITLE: 선정된 주제를 바탕으로 클릭을 유도하는 매력적인 제목을 지으세요.\n" +
-                "2. IMAGE_PROMPT: 글의 분위기를 완벽하게 표현하는 예술적인 영어 프롬프트를 작성하세요. (구체적인 조명, 스타일 묘사 필수)\n" +
-                "3. BODY: 마크다운 형식을 사용하여 본문을 작성하세요. 소제목, 불렛 포인트 등을 활용하여 가독성을 높이세요.\n\n" +
+                        "작성 규칙을 엄격히 준수하세요:\n" +
+                        "1. TITLE: 선정된 주제를 바탕으로 클릭을 유도하는 매력적인 제목을 지으세요.\n" +
+                        "2. IMAGE_PROMPT: 글의 분위기를 완벽하게 표현하는 예술적인 영어 프롬프트를 작성하세요. (구체적인 조명, 스타일 묘사 필수)\n" +
+                        "3. BODY: 본문은 반드시 '표준 마크다운(Markdown)' 문법만 사용하세요.\n" +
+                        "   - ❌ 금지: HTML 태그(<div>, <span>, <font> 등), 색상 코드, 유니코드 이모지 남발 금지.\n" +
+                        "   - ✅ 권장: 소제목(#), 굵게(**), 기울임(*), 리스트(-), 코드블록(```) 위주로 작성.\n" +
+                        "   - 수식이나 강조가 필요하면 굵게(**) 표시하거나 인용문(>)을 사용하세요.\n\n" +
 
-                "출력 형식:\n" +
-                "TITLE: [제목]\n" +
-                "IMAGE_PROMPT: [영어 이미지 프롬프트]\n" +
-                "BODY:\n" +
-                "[본문 내용]";
+                        "출력 형식:\n" +
+                        "TITLE: [제목]\n" +
+                        "IMAGE_PROMPT: [영어 이미지 프롬프트]\n" +
+                        "BODY:\n" +
+                        "[본문 내용]";
 
         return baseRequest;
     }
