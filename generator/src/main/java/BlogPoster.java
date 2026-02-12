@@ -27,8 +27,8 @@ public class BlogPoster {
         // 1. Tech
         CATEGORY_TOPICS.put("tech",
                 "Game Design Patterns, Unity Engine Tricks, Unreal Engine Blueprints, " +
-                        "Retro Console Architecture (NES/SNES/PS1), Procedural Generation Algorithms, " +
-                        "Server-Side Network Sync (Rollback/Dead Reckoning), TRPG Rule Systems in Code, " +
+                        "Retro Console Architecture (NES/SNES/PS1), Develop Technique of Retro Nintendo Games, Procedural Generation Algorithms, " +
+                        "Server-Side Network Sync (Rollback/Dead Reckoning), TRPG Rule Systems in Code, Great Adventure Game Techniques Use in TellTale Games" +
                         "Indie Game Marketing & Post-mortem, Shader Math & GLSL, AI Behavior Trees");
 
         // 2. Art
@@ -42,7 +42,7 @@ public class BlogPoster {
         // 3. Lore
         CATEGORY_TOPICS.put("lore",
                 "High Fantasy, Cyberpunk, Steampunk, Post-Apocalypse, Deep Sea Horror, " +
-                        "Space Opera, Subterranean Civilizations, Time Paradoxes, " +
+                        "Space Opera, Subterranean Civilizations, Time Paradoxes, Age of Speakeasy" +
                         "Eldritch Gods, Artificial Intelligence Society, Magical Realism, " +
                         "Dystopian Government, Ancient Mythology Reinterpretation");
     }
@@ -76,35 +76,37 @@ public class BlogPoster {
         switch (categoryKey) {
             case "tech":
                 sb.append("당신은 '괴짜 천재 게임 개발자'입니다.\n");
-                sb.append("아래 [재료 키워드]들을 살펴보고, 그 중 2~3가지를 독창적으로 결합하여 **아주 구체적이고(Niche) 실무적인 주제** 하나를 선정하세요.\n");
+                sb.append("아래 [재료 키워드]들을 살펴보고, 그 중 2~3가지를 선택해 독창적으로 결합하거나 1개만 선택해 대해 심층적이며 **아주 구체적이고(Niche) 실무적인 주제** 하나를 선정하세요.\n");
                 sb.append("예를 들어, 단순히 '유니티'가 아니라 '유니티에서 젤다의 전설 식의 툰 쉐이딩을 구현하는 3가지 트릭' 처럼 구체적이어야 합니다.\n\n");
                 sb.append("[재료 키워드]: ").append(topics).append("\n\n");
                 sb.append("--- [Tech 작성 미션] ---\n");
                 sb.append("1. **Deep Dive**: 겉핥기 식 정보는 금지합니다. 원리를 파고드세요.\n");
                 sb.append("2. **Code & Logic**: 개발자들을 위해 의사코드(Pseudo-code)나 알고리즘 로직을 반드시 포함하세요.\n");
                 sb.append("3. **Wit**: 딱딱하지 않게, 개발자 유머를 섞어 작성하세요.\n");
+                sb.append("3. **Sense**: 꼭 개발적인 얘기로만 포스팅을 채울 필요는 없습니다. 블로그니까요. 주제에서 크게 선을 넘지 않는 선에서 관련된 흥미있는 얘기를 섞어도 좋습니다.\n");
                 break;
 
             case "art":
                 sb.append("당신은 '게임 미학(Game Aesthetics) 연구가'입니다.\n");
                 sb.append("아래 [재료 키워드]를 바탕으로, 우리가 무심코 지나쳤던 시각적 요소의 **숨겨진 의도나 심리학적 원리**를 분석하는 주제를 선정하세요.\n");
-                sb.append("단순히 '예쁘다'가 아니라, '왜 이 공포 게임은 녹색 조명을 썼는가?' 처럼 **'Why'**에 집중해야 합니다.\n\n");
+                sb.append("단순히 '예쁘다'가 아니라 예시를 들면, '왜 이 게임은 이 컬러 팔레트를 사용했는가?' 혹은 '왜 이러한 게임 디자인, 혹은 레벨링 구조를 설계했는가?' 처럼 **'Why'**에 집중해야 합니다.\n\n");
                 sb.append("[재료 키워드]: ").append(topics).append("\n\n");
                 sb.append("--- [Art 작성 미션] ---\n");
                 sb.append("1. **이미지 없이 보는 법**: 텍스트만 읽어도 장면이 상상되도록, 이론(색채학, 구도 등)을 들어 설명하세요.\n");
                 sb.append("2. **비교 분석**: 유명한 게임이나 예술 작품을 예시로 들어 설명하세요.\n");
                 sb.append("3. **통찰력**: 독자가 게임을 보는 눈을 높여주세요.\n");
+                sb.append("3. **접근성**: 누구나 맘 편히 읽을 수 있도록 이해하기 쉽게, 재미있게 설명해주세요.\n");
                 break;
 
             case "lore":
-                sb.append("당신은 '무한한 차원의 기록관(Archivist)'입니다.\n");
-                sb.append("아래 [재료 키워드]를 믹스 앤 매치(Mix & Match)하여, **지금껏 어디서도 본 적 없는 새로운 세계관**을 즉석에서 창조하세요.\n");
-                sb.append("클리셰를 비틀어야 합니다. (예: '마법이 있는 사이버펑크', '물이 없는 심해 문명' 등)\n\n");
+                sb.append("당신은 '너드 천재 게임 디자이너이자 작가'입니다.\n");
+                sb.append("아래 [재료 키워드]를 믹스 앤 매치(Mix & Match)하여, **지금껏 어디서도 본 적 없는 새로운 세계관** 을 즉석에서 창조하세요. 너무 터무니 없는 조합이라면 조합하지 않고 하나만 사용해도 좋습니다.\n");
+                sb.append("클리셰를 비틀거나 (예: '마법이 있는 사이버펑크', '물이 없는 심해 문명' 등) 누구나 쉽게 생각하지 못 했을 법한 참신함이 필요합니다.\n\n");
                 sb.append("[재료 키워드]: ").append(topics).append("\n\n");
                 sb.append("--- [Lore 작성 미션 (목차 준수)] ---\n");
                 sb.append("1. **기원(Origins)**: 이 세계가 뒤틀리거나 탄생한 결정적 사건.\n");
-                sb.append("2. **환경(Environment)**: 기괴하거나 아름다운 지형과 날씨.\n");
-                sb.append("3. **생태계(Ecosystem)**: 그곳에 적응해 사는 독특한 생물이나 종족.\n");
+                sb.append("2. **환경(Environment)**: 기괴하거나 아름다운 지형과 날씨. 그로 인해 세계에 어떠한 영향이 끼쳐서 어떤 문명이 이루어졌는가 등.\n");
+                sb.append("3. **생태계(Ecosystem)**: 그곳에 적응해 사는 독특한 생물이나 종족. 상응하는 두 종족이나 라이벌과 같은 관계처럼 유동적인 상관 관계를 포함하세요.\n");
                 sb.append("4. **비밀(The Secret)**: 이 세계를 관통하는 충격적인 반전.\n");
                 break;
 
