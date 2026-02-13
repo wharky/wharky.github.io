@@ -26,7 +26,7 @@ public class BlogPoster {
     static {
         // 1. Tech
         CATEGORY_TOPICS.put("tech",
-                "Game Design Patterns, Unity Engine Tricks, Unreal Engine Blueprints, " +
+                "Game Design Patterns, System of Interactive Movie games ,Unity Engine Tricks, Unreal Engine Blueprints, " +
                         "Retro Console Architecture (NES/SNES/PS1), Develop Technique of Retro Nintendo Games, Procedural Generation Algorithms, " +
                         "Server-Side Network Sync (Rollback/Dead Reckoning), TRPG Rule Systems in Code, Great Adventure Game Techniques Use in TellTale Games" +
                         "Indie Game Marketing & Post-mortem, Shader Math & GLSL, AI Behavior Trees");
@@ -42,9 +42,9 @@ public class BlogPoster {
         // 3. Lore
         CATEGORY_TOPICS.put("lore",
                 "High Fantasy, Cyberpunk, Steampunk, Post-Apocalypse, Deep Sea Horror, " +
-                        "Space Opera, Subterranean Civilizations, Time Paradoxes, Age of Speakeasy" +
+                        "Space Opera, Great HiveMind, Time Paradoxes, Age of Speakeasy" +
                         "Eldritch Gods, Artificial Intelligence Society, Magical Realism, " +
-                        "Dystopian Government, Ancient Mythology Reinterpretation");
+                        "Dystopian Government, Gangsters and Mafia, Ancient Mythology Reinterpretation");
     }
 
     // [수정 2] 불필요해진 CategoryConfig 클래스 삭제함
