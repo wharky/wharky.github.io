@@ -41,9 +41,9 @@ public class BlogPoster {
 
         // 3. Lore
         CATEGORY_TOPICS.put("lore",
-                "High Fantasy, Cyberpunk, Steampunk, Post-Apocalypse, Deep Sea Horror, Lord of the Rings, Dota2, League of Legends," +
-                        "Space Opera, Great HiveMind, Time Paradoxes, Age of Speakeasy, Magic the gathering, Telltale games Among us," +
-                        "Eldritch Gods, Artificial Intelligence Society, Magical Realism, World of Warcraft," +
+                "High Fantasy, Cyberpunk, Steampunk, Post-Apocalypse, Deep Sea Horror, Lord of the Rings, Dota2, League of Legends, " +
+                        "Space Opera, Great HiveMind, Time Paradoxes, Magic the gathering, Telltale games Among us, " +
+                        "Eldritch Gods, Artificial Intelligence Society, Magical Realism, World of Warcraft, " +
                         "Dystopian Government, Gangsters and Mafia, Ancient Mythology Reinterpretation");
     }
 
