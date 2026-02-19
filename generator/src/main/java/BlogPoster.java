@@ -44,10 +44,10 @@ public class BlogPoster {
 
         // 3. Lore
         CATEGORY_TOPICS.put("lore",
-                "High Fantasy, Cyberpunk, Steampunk, Post-Apocalypse, Deep Sea Horror, Lord of the Rings style, Dota2 Lore, League of Legends Universe, " +
-                        "Space Opera, Great HiveMind, Time Paradoxes, Magic the Gathering Color Pie, Telltale Games Narrative Style, Among Us Social Deduction, " +
-                        "Eldritch Gods, Artificial Intelligence Society, Magical Realism, World of Warcraft History, " +
-                        "Dystopian Government, Gangsters and Mafia, Ancient Mythology Reinterpretation");
+                "High Fantasy, Cyberpunk, Steampunk, Post-Apocalypse, Deep Sea Horror, League of Legends Universe, " +
+                        "Space Opera, Cosmic Horror, Time Paradoxes, Magic the Gathering Universe, Among Us(Telltale Games) Universe, DC Comics Universe, " +
+                        "Eldritch Gods, Artificial Intelligence Society, Magical Realism, Path Of Exile(Online Game) Universe, " +
+                        "Dystopian Government, Gangsters and Mafia");
     }
 
     public static void main(String[] args) throws Exception {
@@ -132,9 +132,10 @@ public class BlogPoster {
                 sb.append("흔한 클리셰를 비틀어, 독자에게 신선한 충격을 주어야 합니다. 억지로 두 개를 섞기 어렵다면 하나를 메인 테마로 잡으세요.\n\n");
                 
                 sb.append("--- [Lore 작성 가이드라인] ---\n");
-                sb.append("1. **Narrative Hook**: 백과사전처럼 건조하게 나열하지 마세요. 누군가의 '발견 기록', '고대 비석의 해석', 혹은 '생존자의 일기' 형식으로 몰입감을 주세요.\n");
+                sb.append("1. **Narrative Hook**: 당신은 훌륭한 스토리 텔러입니다. 생생하면서도 디테일한 설명으로 독자가 몰입하도록 하세요.\n");
                 sb.append("2. **Origins (기원)**: 이 세계가 왜 이런 형태가 되었는지에 대한 역사적/신화적 배경.\n");
-                sb.append("3. **Ecosystem & Culture**: 그 환경에 적응한 기괴한 생태계나, 독특한 사회 구조/법칙.\n");
+                sb.append("3. **Ecosystem & Culture**: 그 환경에 적응한 고유하고 특이한 생태계와 독특한 사회 구조/법칙.\n");
+                sb.append("3. **Species & Tribe**: 그 세상에 살고 있는 특색 있는 종족이나 부족 등. 유니크한 종족을 창조하여 설명하세요.\n");
                 sb.append("4. **The Twist (비밀)**: 겉으로 보이는 평화나 질서 뒤에 숨겨진 어두운 비밀이나 반전 요소를 포함하세요.\n");
                 break;
 
