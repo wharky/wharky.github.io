@@ -17,37 +17,44 @@ import java.util.Map;
 
 public class BlogPoster {
 
-    // 모델명: gemini-2.5-flash (최신 모델 권장)
+    // 모델명: gemini-2.5-flash (최신 모델)
     private static final String API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent";
 
     // -------------------------------------------------------------------
-    // [설정 영역] Gemini가 요리할 '광범위한 재료(Seeds)'
-    // (오타 수정 및 가독성 개선 완료)
+    // [설정 영역] 트렌디하게 업데이트된 키워드 (Seeds)
     // -------------------------------------------------------------------
     private static final Map<String, String> CATEGORY_TOPICS = new HashMap<>();
 
     static {
-        // 1. Tech
+        // 1. Tech (최신 엔진 트렌드, AI 연동, 최적화 중심)
         CATEGORY_TOPICS.put("tech",
-                "Game Design Patterns, System of Interactive Movie Games, Unity Engine Optimization Tricks, Unreal Engine Blueprints Best Practices, " +
-                        "Retro Console Architecture (NES/SNES/PS1), Development Techniques of Retro Nintendo Games, Procedural Generation Algorithms, " +
-                        "Server-Side Network Sync (Rollback/Dead Reckoning), TRPG Rule Systems implemented in Code, Narrative Design Techniques used in Telltale Games, " +
-                        "Indie Game Marketing & Post-mortem, Shader Math & GLSL, AI Behavior Trees, Data-Oriented Technology Stack (DOTS)");
+                "Godot 4 Architecture vs Unity, LLM powered NPC Dialogue Systems, Unreal Engine 5 Nanite & Lumen Optimization, " +
+                        "ECS (Entity Component System) Deep Dive, Rollback Netcode for Indie Games, Procedural Animation & Inverse Kinematics (IK), " +
+                        "Shader Graph Magic for Stylized Water, WebGL rendering tricks, Serverless Multiplayer Backend, Data-Oriented Technology Stack (DOTS)");
 
-        // 2. Art
+        // 2. Art (최신 미학 트렌드, 레트로의 귀환, 내러티브 중심 시각화)
         CATEGORY_TOPICS.put("art",
-                "Color Theory & Psychology in Games, Pixel Art Techniques, Photorealism vs Stylized, " +
-                        "Shape Language (Circle/Square/Triangle), Environmental Storytelling, " +
-                        "UI/UX Design Philosophy (Diegetic/Meta), The Uncanny Valley effect, " +
-                        "Fantasy Cartography, Architectural History (Gothic/Baroque/Cyberpunk), " +
-                        "Lighting Composition & Mood, Character Silhouette Design, Visual Hierarchy");
+                "PS1 Retro Low-poly Aesthetic, Spider-Verse Style NPR (Non-Photorealistic Rendering), Liminal Space & Environmental Storytelling, " +
+                        "Brutalist UI/UX in Modern Games, Solarpunk Color Palettes, Volumetric Lighting and Mood, " +
+                        "Diegetic UI in Narrative Games, The Uncanny Valley in Metahumans, Tech-Art: Procedural Weather Systems");
 
-        // 3. Lore
+        // 3. Lore (매니아들이 열광하는 장르 융합)
         CATEGORY_TOPICS.put("lore",
-                "High Fantasy, Cyberpunk, Steampunk, Post-Apocalypse, Deep Sea Horror, League of Legends Universe, " +
-                        "Space Opera, Cosmic Horror, Time Paradoxes, Magic the Gathering Universe, Among Us(Telltale Games) Universe, DC Comics Universe, " +
-                        "Eldritch Gods, Artificial Intelligence Society, Magical Realism, Path Of Exile(Online Game) Universe, " +
-                        "Dystopian Government, Gangsters and Mafia");
+                "Analog Horror, Cozy Fantasy but Dark Magic, Neo-Noir Cyberpunk, Solarpunk Dystopia, Mythological Space Opera, " +
+                        "SCP Foundation-style Anomalies, Liminal Afterlife, Steampunk Deep Sea Exploration, Alternate History AI Society, " +
+                        "Victorian Cosmic Horror");
+
+        // 4. Game Design (신규: 텔테일 스타일 인터랙티브 무비 기획)
+        CATEGORY_TOPICS.put("game_design",
+                "The Illusion of Choice in Narrative Games, Evolution of QTE (Quick Time Events), Branching Dialogue Tree Architecture, " +
+                        "Relationship & Affection Meters, Timed Decisions and Player Panic, Inventory Puzzles vs Dialogue Puzzles, " +
+                        "Episodic Pacing & Cliffhangers, Managing Exponential Branching Paths, Morality Systems without Good/Evil");
+
+        // 5. Interactive Story (신규: 텔테일 스타일 스토리 보드/시나리오)
+        CATEGORY_TOPICS.put("interactive_story",
+                "Zombie Apocalypse with Found Family, Gritty Detective Noir with Anthropomorphic Animals, Betrayal in a Locked-Room Mystery, " +
+                        "Time-loop Psychological Thriller, Dystopian Rebellion with a Child Companion, Cosmic Horror on an Abandoned Space Station, " +
+                        "A Murder Mystery where the Player is the Killer, Moral Dilemmas with No Right Answer");
     }
 
     public static void main(String[] args) throws Exception {
@@ -61,7 +68,6 @@ public class BlogPoster {
         String apiKey = System.getenv("GAK");
         if (apiKey == null || apiKey.isEmpty()) throw new RuntimeException("API Key (GAK)가 없습니다.");
 
-        // Java에서 랜덤 키워드를 강제로 뽑아서 프롬프트 생성
         String prompt = generatePrompt(categoryKey);
         System.out.println("Category: " + categoryKey + " / Creating New Post...");
 
@@ -72,7 +78,7 @@ public class BlogPoster {
     private static String generatePrompt(String categoryKey) {
         // 1. 전체 키워드 문자열 가져오기
         String allTopicsString = CATEGORY_TOPICS.get(categoryKey);
-        
+
         // 2. 쉼표로 쪼개고 리스트로 변환
         String[] topicArray = allTopicsString.split(",");
         List<String> topicList = new ArrayList<>();
@@ -82,61 +88,64 @@ public class BlogPoster {
             }
         }
 
-        // 3. [핵심] Java에서 직접 셔플 (진정한 무작위 보장)
+        // 3. [수정됨] 셔플 후 메인 주제 딱 '1개'만 선택 (깊이 있는 포스팅을 위해)
         Collections.shuffle(topicList);
+        String mainTopic = topicList.get(0);
 
-        // 4. 키워드 2개 선정
-        String selectedTopic1 = topicList.get(0);
-        String selectedTopic2 = (topicList.size() > 1) ? topicList.get(1) : selectedTopic1;
-        
-        // 프롬프트에 들어갈 최종 재료
-        String finalSelectedTopics = String.format("'%s' AND '%s'", selectedTopic1, selectedTopic2);
-
-        System.out.println("Selected Random Topics: " + finalSelectedTopics); 
+        System.out.println("Selected Main Topic: " + mainTopic);
 
         long randomSeed = System.currentTimeMillis();
         StringBuilder sb = new StringBuilder();
 
         // -------------------------------------------------------------------
-        // [프롬프트 개선 버전]
+        // [프롬프트 개선: 1개의 주제에 집중하여 깊이와 가독성을 높임]
         // -------------------------------------------------------------------
         switch (categoryKey) {
             case "tech":
-                sb.append("당신은 '실력 있는 시니어 게임 개발자'이자 '테크 블로거'입니다.\n");
-                sb.append("이번 포스팅의 핵심 주제는 다음 두 가지 키워드의 결합입니다: **[").append(finalSelectedTopics).append("]**\n");
-                sb.append("이 두 키워드를 연결하여, 현업 개발자들에게 영감을 줄 수 있는 **깊이 있고(Deep Dive) 실무적인(Practical) 기술 포스팅**을 작성하세요.\n");
-                sb.append("만약 두 키워드의 연결이 너무 억지스럽다면, 첫 번째 키워드를 메인으로 잡고 두 번째 키워드는 비유나 예시로 활용하세요.\n\n");
-                
+                sb.append("당신은 '실력 있는 시니어 게임 개발자'이자 '솔직하고 위트 있는 1티어 테크 블로거'입니다.\n");
+                sb.append("이번 포스팅의 핵심 주제는 **[").append(mainTopic).append("]** 입니다.\n");
                 sb.append("--- [Tech 작성 가이드라인] ---\n");
-                sb.append("1. **Problem & Solution**: 단순 설명보다는 '어떤 문제가 있었고, 이를 이 기술로 어떻게 해결했는가'의 구조를 가지세요.\n");
-                sb.append("2. **Code & Logic**: 개발자들을 위해 의사코드(Pseudo-code)나 핵심 알고리즘 로직, 혹은 아키텍처 다이어그램 설명을 반드시 포함하세요.\n");
-                sb.append("3. **Opinionated**: 단순히 정보를 나열하지 말고, 당신의 주관적인 견해나 경험담(Storytelling)을 섞어 글에 맛을 더하세요.\n");
-                sb.append("4. **Tone**: 너무 딱딱한 논문체보다는, 동료 개발자에게 커피 한 잔 마시며 설명하듯 위트 있고 지적인 어조를 사용하세요.\n");
+                sb.append("1. **서사적 도입**: 뻔한 교과서적 정의로 시작하지 마세요. 실무에서 겪을 법한 문제 상황이나 최근 트렌드를 짚으며 흥미롭게 시작하세요.\n");
+                sb.append("2. **Deep Dive (깊이)**: 겉핥기식 설명은 피하고, 하나의 주제를 집요하게 파고들어 현업 개발자에게 진짜 도움이 되는 인사이트를 제공하세요.\n");
+                sb.append("3. **Code & Logic**: 의사코드(Pseudo-code), 핵심 알고리즘 구조, 또는 아키텍처 예시를 반드시 포함해 실용성을 높이세요.\n");
+                sb.append("4. **Tone**: 동료 개발자와 커피 한잔하며 썰을 푸는 듯한, 전문적이면서도 살짝 까칠하고 재치 있는 어조를 유지하세요.\n");
                 break;
 
             case "art":
-                sb.append("당신은 '게임 미학(Game Aesthetics) 큐레이터'입니다.\n");
-                sb.append("이번 포스팅의 주제는 다음 두 가지 키워드의 미학적 분석입니다: **[").append(finalSelectedTopics).append("]**\n");
-                sb.append("이 요소들이 게임 내에서 어떻게 플레이어의 감정을 조작하고 몰입감을 주는지, **'Why'와 'How'**에 집중하여 분석하세요.\n\n");
-                
+                sb.append("당신은 최신 트렌드를 선도하는 '힙한 게임 아트 디렉터'입니다.\n");
+                sb.append("이번 포스팅의 핵심 주제는 **[").append(mainTopic).append("]** 입니다.\n");
                 sb.append("--- [Art 작성 가이드라인] ---\n");
-                sb.append("1. **Ekphrasis(공감각적 묘사)**: 독자가 이미지를 보지 않고도 머릿속에 장면이 그려지도록 광원, 질감, 색감, 분위기를 섬세하게 묘사하세요.\n");
-                sb.append("2. **Case Study**: 실제 존재하는 유명 게임이나 예술 사조를 구체적인 예시로 들어 비교 분석하세요.\n");
-                sb.append("3. **Insight**: 단순히 '예쁘다'를 넘어, 그것이 게임의 메커니즘이나 내러티브와 어떻게 연결되는지 통찰력을 보여주세요.\n");
-                sb.append("4. **Tone**: 감성적이지만 분석적인, 마치 미술관 가이드가 설명해주는 듯한 우아한 어조를 유지하세요.\n");
+                sb.append("1. **시각적 몰입감**: 독자가 게임 화면을 상상할 수 있도록 질감, 렌더링 방식, 광원을 섬세하고 공감각적으로 묘사하세요.\n");
+                sb.append("2. **Trend & Insight**: 왜 이 아트 스타일/디자인이 유저의 심리에 타격을 주는지 기획적/미학적 관점에서 깊이 분석하세요.\n");
+                sb.append("3. **Tone**: 감각적이고 세련된 어휘를 사용하며, 미학적 분석과 기술적 한계의 타협점을 논하는 프로의 시선을 보여주세요.\n");
                 break;
 
             case "lore":
-                sb.append("당신은 차원을 넘나드는 '세계관 설계자(World Builder)'입니다.\n");
-                sb.append("다음 두 가지 키워드를 믹스 앤 매치(Mix & Match)하여 **매혹적이고 독창적인 새로운 세계**를 창조하세요: **[").append(finalSelectedTopics).append("]**\n");
-                sb.append("흔한 클리셰를 비틀어, 독자에게 신선한 충격을 주어야 합니다. 억지로 두 개를 섞기 어렵다면 하나를 메인 테마로 잡으세요.\n\n");
-                
+                sb.append("당신은 방구석 톨킨이자, 설정 짜는 데 미친 '세계관 과몰입 장인'입니다.\n");
+                sb.append("다음 주제를 바탕으로 매혹적인 세계관 설정을 작성하세요: **[").append(mainTopic).append("]**\n");
                 sb.append("--- [Lore 작성 가이드라인] ---\n");
-                sb.append("1. **Narrative Hook**: 당신은 훌륭한 스토리 텔러입니다. 생생하면서도 디테일한 설명으로 독자가 몰입하도록 하세요.\n");
-                sb.append("2. **Origins (기원)**: 이 세계가 왜 이런 형태가 되었는지에 대한 역사적/신화적 배경.\n");
-                sb.append("3. **Ecosystem & Culture**: 그 환경에 적응한 고유하고 특이한 생태계와 독특한 사회 구조/법칙.\n");
-                sb.append("3. **종족과 집단**: 그 세상에 살고 있는 듣도 보도 못한 특색 있는 종족이나 부족 등. 유니크한 종족을 창조하여 설명하세요.\n");
-                sb.append("4. **The Twist (비밀)**: 겉으로 보이는 평화나 질서 뒤에 숨겨진 어두운 비밀이나 반전 요소를 포함하세요.\n");
+                sb.append("1. **클리셰 파괴**: 흔한 설정은 버리세요. 독자가 '이런 생각을 어떻게 했지?' 싶을 기괴하거나 독창적인 설정을 디테일하게 만드세요.\n");
+                sb.append("2. **절대 규칙**: 이 세계를 관통하는 단 하나의 '절대 규칙'이나 '가혹한 제약'을 설정하고 그로 인해 파생되는 문화를 서술하세요.\n");
+                sb.append("3. **Tone**: 다크소울의 아이템 텍스트나 흥미로운 미스터리 소설을 읽는 것처럼 신비롭고 몰입감 있게 작성하세요.\n");
+                break;
+
+            case "game_design":
+                sb.append("당신은 'The Walking Dead', 'Sam & Max' 같은 텔테일 게임즈 스타일의 인터랙티브 게임 '시니어 기획자'입니다.\n");
+                sb.append("이번 포스팅의 핵심 주제는 **[").append(mainTopic).append("]** 입니다.\n");
+                sb.append("--- [Game Design 작성 가이드라인] ---\n");
+                sb.append("1. **시스템 딥다이브**: 이 기획 요소가 기술적으로, 그리고 게임 디자인적으로 어떻게 작동하는지 상세히 분해하여 설명하세요.\n");
+                sb.append("2. **선택과 결과 (Illusion of Choice)**: 이 시스템이 유저에게 어떻게 '선택의 무게감'을 느끼게 하고 감정을 조종하는지 분석하세요.\n");
+                sb.append("3. **Tone**: 기획서를 브리핑하는 프로페셔널한 톤이되, '유저를 어떻게 딜레마에 빠뜨릴지' 고민하는 악동 같은 매력을 섞어주세요.\n");
+                break;
+
+            case "interactive_story":
+                sb.append("당신은 'The Walking Dead' 같은 인터랙티브 무비 게임의 '수석 내러티브 디렉터'입니다.\n");
+                sb.append("다음 테마를 바탕으로 게임의 핵심 에피소드 스토리보드를 기획하세요: **[").append(mainTopic).append("]**\n");
+                sb.append("--- [Story 작성 가이드라인] ---\n");
+                sb.append("1. **로그라인 & 빌드업**: 이 에피소드의 핵심 갈등을 한 줄로 요약하고, 텐션이 올라가는 과정을 서술하세요.\n");
+                sb.append("2. **치명적인 딜레마 (The Ultimate Choice)**: 에피소드 클라이맥스에 등장할 '정답이 없는 도덕적 딜레마' 상황을 매우 구체적이고 잔인할 정도로 현실적으로 묘사하세요.\n");
+                sb.append("3. **극단적 분기점**: 유저의 선택(Option A vs Option B)에 따라 나비효과처럼 결말이 어떻게 찢어지는지 상세히 서술하세요.\n");
+                sb.append("4. **Tone**: 당장이라도 게임 패드를 쥐고 싶어 지도록, 긴장감 넘치고 하드보일드한 분위기로 몰입감 있게 작성하세요.\n");
                 break;
 
             default:
@@ -144,16 +153,15 @@ public class BlogPoster {
         }
 
         sb.append("\n\n--- [시스템 필수 제약사항] ---\n");
-        sb.append("1. **NO HTML**: <div>, <span> 등 태그 사용 금지 (Markdown만 사용).\n");
-        sb.append("2. **Language**: 한국어(Korean)로 자연스럽게 작성.\n");
-        sb.append("3. **IMAGE_PROMPT**: 주제를 가장 잘 나타내는 고퀄리티 예술적 영문 프롬프트 (Abstract, Cinematic lighting 등 키워드 포함).\n");
+        sb.append("1. **NO HTML**: <div>, <span> 등 태그 절대 사용 금지 (오직 Markdown 문법만 사용).\n");
+        sb.append("2. **Language**: 한국어(Korean)로 자연스럽게 작성하되, 가독성을 위해 적절한 소제목(##, ###), 글머리기호, 볼드체를 적극 활용하세요.\n");
+        sb.append("3. **IMAGE_PROMPT**: 글의 분위기를 완벽하게 대변하는 고퀄리티 영문 이미지 프롬프트를 작성하세요. (Cinematic lighting, Unreal Engine 5 render, concept art 등 포함).\n");
         sb.append("4. **Random Seed**: ").append(randomSeed).append("\n");
         sb.append("5. **출력 형식(Strict format)**:\n\n");
-        sb.append("TITLE: [클릭을 유도하는 매력적인 제목]\n");
+        sb.append("TITLE: [클릭을 유도하는 매력적이고 자극적인 제목]\n");
         sb.append("IMAGE_PROMPT: [영어 이미지 프롬프트]\n");
         sb.append("BODY:\n");
-        sb.append("본문 시작 시, 오늘의 주제 키워드(").append(finalSelectedTopics).append(")를 자연스럽게 언급하며 시작하세요.\n");
-        sb.append("[본문 내용]");
+        sb.append("[본문 내용. 서론/본론/결론이 잘 나뉘어진 깔끔한 마크다운 형태]");
 
         return sb.toString();
     }
@@ -178,7 +186,6 @@ public class BlogPoster {
         String imagePrompt = "abstract digital art";
         String body = "";
 
-        // 1. 파싱
         try {
             int textStart = jsonResponse.indexOf("\"text\": \"");
             if (textStart > -1) {
@@ -186,7 +193,6 @@ public class BlogPoster {
                 String rawText = temp.split("\"\\s*\\n*\\s*}")[0];
                 String unescaped = rawText.replace("\\n", "\n").replace("\\\"", "\"");
 
-                // HTML 태그 및 유니코드 찌꺼기 제거
                 unescaped = unescaped.replaceAll("<[^>]*>", "").replace("\\u003c", "<").replace("\\u003e", ">");
 
                 String[] lines = unescaped.split("\n");
@@ -212,16 +218,13 @@ public class BlogPoster {
             System.err.println("파싱 에러: " + e.getMessage());
         }
 
-        // 2. 이미지 생성
         String encodedPrompt = URLEncoder.encode(imagePrompt, StandardCharsets.UTF_8);
         int randomSeed = (int)(Math.random() * 10000);
         String imageUrl = "https://image.pollinations.ai/prompt/" + encodedPrompt + "?width=800&height=450&nologo=true&seed=" + randomSeed;
         boolean isImageAvailable = checkImageAvailability(imageUrl);
 
-        // 3. 파일 저장
         ZoneId kstZone = ZoneId.of("Asia/Seoul");
         LocalDate now = LocalDate.now(kstZone);
-        // 파일명에 특수문자 제거
         String safeTitle = title.replaceAll("[^a-zA-Z0-9가-힣\\s]", "").replace(" ", "-");
         if(safeTitle.length() > 50) safeTitle = safeTitle.substring(0, 50);
 
@@ -241,7 +244,8 @@ public class BlogPoster {
             content.append("### \u26A0\uFE0F Image Generation Failed\n");
             content.append("```text\n");
             content.append("Prompt: " + imagePrompt + "\n");
-            content.append("```\n\n");
+            content.append("
+                    ```\n\n");
         }
         content.append(body);
 
