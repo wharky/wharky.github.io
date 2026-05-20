@@ -45,13 +45,13 @@ public class BlogPoster {
                         "Victorian Cosmic Horror");
 
         // 4. Game Design (신규: 텔테일 스타일 인터랙티브 무비 기획)
-        CATEGORY_TOPICS.put("game_design",
+        CATEGORY_TOPICS.put("game",
                 "The Illusion of Choice in Narrative Games, Evolution of QTE (Quick Time Events), Branching Dialogue Tree Architecture, " +
                         "Relationship & Affection Meters, Timed Decisions and Player Panic, Inventory Puzzles vs Dialogue Puzzles, " +
                         "Episodic Pacing & Cliffhangers, Managing Exponential Branching Paths, Morality Systems without Good/Evil");
 
         // 5. Interactive Story (신규: 텔테일 스타일 스토리 보드/시나리오)
-        CATEGORY_TOPICS.put("interactive_story",
+        CATEGORY_TOPICS.put("story",
                 "Zombie Apocalypse with Found Family, Gritty Detective Noir with Anthropomorphic Animals, Betrayal in a Locked-Room Mystery, " +
                         "Time-loop Psychological Thriller, Dystopian Rebellion with a Child Companion, Cosmic Horror on an Abandoned Space Station, " +
                         "A Murder Mystery where the Player is the Killer, Moral Dilemmas with No Right Answer");
