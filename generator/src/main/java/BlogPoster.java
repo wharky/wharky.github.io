@@ -244,7 +244,7 @@ public class BlogPoster {
             content.append("### \u26A0\uFE0F Image Generation Failed\n");
             content.append("```text\n");
             content.append("Prompt: " + imagePrompt + "\n");
-            ccontent.append("```\n\n");
+            content.append("```\n\n");
         }
         content.append(body);
 
