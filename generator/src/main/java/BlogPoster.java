@@ -129,7 +129,7 @@ public class BlogPoster {
                 sb.append("3. **Tone**: 다크소울의 아이템 텍스트나 흥미로운 미스터리 소설을 읽는 것처럼 신비롭고 몰입감 있게 작성하세요.\n");
                 break;
 
-            case "game_design":
+            case "game":
                 sb.append("당신은 'The Walking Dead', 'Sam & Max' 같은 텔테일 게임즈 스타일의 인터랙티브 게임 '시니어 기획자'입니다.\n");
                 sb.append("이번 포스팅의 핵심 주제는 **[").append(mainTopic).append("]** 입니다.\n");
                 sb.append("--- [Game Design 작성 가이드라인] ---\n");
@@ -138,7 +138,7 @@ public class BlogPoster {
                 sb.append("3. **Tone**: 기획서를 브리핑하는 프로페셔널한 톤이되, '유저를 어떻게 딜레마에 빠뜨릴지' 고민하는 악동 같은 매력을 섞어주세요.\n");
                 break;
 
-            case "interactive_story":
+            case "story":
                 sb.append("당신은 'The Walking Dead' 같은 인터랙티브 무비 게임의 '수석 내러티브 디렉터'입니다.\n");
                 sb.append("다음 테마를 바탕으로 게임의 핵심 에피소드 스토리보드를 기획하세요: **[").append(mainTopic).append("]**\n");
                 sb.append("--- [Story 작성 가이드라인] ---\n");
