@@ -12,20 +12,23 @@ entries:
   - title: tech
     post_list:
       category: tech
+      limit: 5
       show_more: true
       show_more_text: See more posts..
-      show_more_url: archive.html
+      show_more_url: archive-tech.html
 
   - title: art
     post_list:
       category: art
+      limit: 5
       show_more: true
       show_more_text: See more posts..
-      show_more_url: archive.html
+      show_more_url: archive-art.html
 
   - title: lore
     post_list:
       category: lore
+      limit: 5
       show_more: true
       show_more_text: See more posts..
       show_more_url: archive-lore.html
