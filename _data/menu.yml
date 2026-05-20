@@ -33,6 +33,22 @@ entries:
       show_more_text: See more posts..
       show_more_url: archive-lore.html
 
+  - title: game
+    post_list:
+      category: game
+      limit: 5
+      show_more: true
+      show_more_text: See more posts..
+      show_more_url: archive-game.html
+
+  - title: story
+    post_list:
+      category: story
+      limit: 5
+      show_more: true
+      show_more_text: See more posts..
+      show_more_url: archive-story.html
+      
   - title: all posts
     post_list:
       limit: 5
