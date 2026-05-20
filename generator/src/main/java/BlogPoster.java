@@ -18,7 +18,7 @@ import java.util.Map;
 public class BlogPoster {
 
     // 모델명: gemini-2.5-flash (최신 모델)
-    private static final String API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent";
+    private static final String API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash:generateContent";
 
     // -------------------------------------------------------------------
     // [설정 영역] 트렌디하게 업데이트된 키워드 (Seeds)
