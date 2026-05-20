@@ -23,7 +23,7 @@ jobs:
       - name: Run Art Generator
         env:
           GAK: ${{ secrets.GAK }}
-        run: java generator/src/main/java/BlogPoster.java game_design  # 인자로 art 전달
+        run: java generator/src/main/java/BlogPoster.java game
 
       - name: Commit and Push
         run: |
