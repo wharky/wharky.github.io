@@ -1,8 +1,8 @@
-name: Daily Tech Post (23:00 UTC)
+name: Daily Fiction Post (21:00 UTC)
 
 on:
   schedule:
-    - cron: '0 23 * * *' # UTC 23:00 = KST 08:00
+    - cron: '0 21 * * *' # UTC 23:00 = KST 08:00
   workflow_dispatch:
 
 permissions:
@@ -23,12 +23,12 @@ jobs:
       - name: Run Tech Generator
         env:
           GAK: ${{ secrets.GAK }}
-        run: java generator/src/main/java/BlogPoster.java tech  # 인자로 tech 전달
+        run: java generator/src/main/java/BlogPoster.java fiction
 
       - name: Commit and Push
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add _posts/
-          git commit -m "Auto-post: Tech content" || echo "No changes"
+          git commit -m "Auto-post: Fiction content" || echo "No changes"
           git push
