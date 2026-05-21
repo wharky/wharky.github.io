@@ -1,8 +1,8 @@
-name: Daily Art Post (02:00 UTC)
+name: Daily UIUX Post (20:00 UTC)
 
 on:
   schedule:
-    - cron: '0 2 * * *' # UTC 02:00 = KST 11:00
+    - cron: '0 20 * * *'
   workflow_dispatch:
 
 permissions:
@@ -23,12 +23,12 @@ jobs:
       - name: Run Art Generator
         env:
           GAK: ${{ secrets.GAK }}
-        run: java generator/src/main/java/BlogPoster.java art  # 인자로 art 전달
+        run: java generator/src/main/java/BlogPoster.java uiux
 
       - name: Commit and Push
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add _posts/
-          git commit -m "Auto-post: Art content" || echo "No changes"
+          git commit -m "Auto-post: UIUX content" || echo "No changes"
           git push
