@@ -1,8 +1,8 @@
-name: Daily Game Post (12:00 UTC)
+name: Daily Planet Post (00:00 UTC)
 
 on:
   schedule:
-    - cron: '0 12 * * *'
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 permissions:
@@ -23,12 +23,12 @@ jobs:
       - name: Run Art Generator
         env:
           GAK: ${{ secrets.GAK }}
-        run: java generator/src/main/java/BlogPoster.java game
+        run: java generator/src/main/java/BlogPoster.java planet
 
       - name: Commit and Push
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add _posts/
-          git commit -m "Auto-post: Game content" || echo "No changes"
+          git commit -m "Auto-post: Planet content" || echo "No changes"
           git push
