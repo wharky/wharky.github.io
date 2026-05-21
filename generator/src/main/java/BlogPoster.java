@@ -17,15 +17,14 @@ import java.util.Map;
 
 public class BlogPoster {
 
-    private static final String API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash:generateContent";
+    private static final String API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent";
 
     // -------------------------------------------------------------------
-    // [설정 영역] 반복 실행에도 중복을 방지하는 거대한 세계관/제약 프레임워크
+    // [설정 영역] 세계관 프레임워크 (이전과 동일)
     // -------------------------------------------------------------------
     private static final Map<String, String> CATEGORY_TOPICS = new HashMap<>();
 
     static {
-        // 1. boss (보스전 기획) - 구체적 이름 대신 '컨셉'과 '기믹의 방향성'을 제공
         CATEGORY_TOPICS.put("boss",
                 "기계와 유기체가 기괴하게 융합된 사이보그형 신성(Divine) 보스, " +
                 "특정 감정(공포 슬픔 광기 등)을 먹고 자라난 무형의 코스믹 호러 보스, " +
@@ -33,7 +32,6 @@ public class BlogPoster {
                 "플레이어의 기억이나 과거 행동을 모방하고 비틀어버리는 도플갱어형 보스, " +
                 "소리나 빛 같은 특정 물리적 요소가 극도로 결핍되거나 과잉된 환경의 지배자");
 
-        // 2. fiction (마이크로 픽션) - 사물 대신 '서사적 상황'을 제공
         CATEGORY_TOPICS.put("fiction",
                 "절대 열어서는 안 되는 문턱(Threshold)을 넘어선 관찰자의 마지막 시선, " +
                 "너무나도 발전한 기술이 오히려 종교나 미신처럼 변질되어버린 광신적 디스토피아, " +
@@ -41,7 +39,6 @@ public class BlogPoster {
                 "우주 한가운데서 발견된 지구와 똑같지만 모든 것이 거울처럼 반전된 장소, " +
                 "특정 단어나 개념을 입 밖으로 꺼내는 순간 존재가 지워지는 세계");
 
-        // 3. artifact (마도구/아티팩트) - 형태 대신 '저주와 대가'의 프레임워크 제공
         CATEGORY_TOPICS.put("artifact",
                 "현대 IT 기기나 일상용품에 깃든 고대 악마의 지독한 저주, " +
                 "사용자의 신체 일부나 수명 기억을 대가로 엄청난 편의성을 제공하는 불법 기물, " +
@@ -49,7 +46,6 @@ public class BlogPoster {
                 "인간의 추억이나 감정을 물리적인 데이터로 추출해 보관하는 기괴한 장치, " +
                 "미래에서 온 것으로 추정되지만 현재 인류의 상식으로는 목적을 알 수 없는 도구");
 
-        // 4. planet (행성 탐사) - 환경 대신 '물리 법칙의 이질성' 제공
         CATEGORY_TOPICS.put("planet",
                 "물리 법칙(중력 시간 빛의 굴절 등)이 지구와 완전히 반대로 혹은 무작위로 작용하는 구역, " +
                 "행성 전체가 하나의 거대한 단일 생명체(초개체)로 이루어진 신경망 행성, " +
@@ -57,7 +53,6 @@ public class BlogPoster {
                 "무기물(금속 유리 플라스틱 등)이 유기체처럼 번식하고 진화하는 기계 생태계, " +
                 "관찰자의 무의식이나 공포를 실시간으로 스캐닝하여 환경을 변화시키는 악몽의 행성");
 
-        // 5. servicenow (ITSM x 판타지) - 기관 대신 '발생한 시스템적 재앙' 제공
         CATEGORY_TOPICS.put("servicenow",
                 "인간의 영혼이나 수명을 화폐로 사용하는 이계 기관의 치명적인 결재 시스템 장애, " +
                 "물리적 공간을 초월해 차원 간 포탈을 관리하는 인프라 서버의 기괴한 무한 루프 버그, " +
@@ -65,15 +60,13 @@ public class BlogPoster {
                 "기계 반란을 일으킨 AI들이 자신들의 복지 향상을 위해 제출한 황당한 개선 요청 티켓, " +
                 "망자들의 기억을 백업하는 데이터베이스에서 발생한 치명적인 데이터 오염 사태");
 
-        // 6. tarot (개발자 타로) - 특정 카드 대신 '점괘의 성격' 제공
         CATEGORY_TOPICS.put("tarot",
                 "치명적인 서버 장애나 대규모 데이터 유실 상황을 묵시록적으로 예언하는 파멸적인 점괘, " +
                 "뜻밖의 치명적 버그가 오히려 혁신적인 킬러 기능으로 둔갑하게 되는 기적적인 운세, " +
-                "야근, 크런치 모드, 무능한 상사 등 인간관계와 일정에 관한 고통스러운 예언, " +
+                "야근 크런치 모드 무능한 상사 등 인간관계와 일정에 관한 고통스러운 예언, " +
                 "새로운 프레임워크나 언어 도입을 앞두고 겪게 될 끝없는 혼란과 극복의 메시지, " +
                 "레거시 코드 속에 잠들어 있던 기괴한 모듈이 깨어나면서 벌어지는 나비효과 운세");
 
-        // 7. uiux (다크 패턴) - UI 요소 대신 '사용자를 괴롭히는 심리적 목적' 제공
         CATEGORY_TOPICS.put("uiux",
                 "사용자의 개인정보를 넘어 은밀한 기억이나 수치심까지 요구하는 악마적인 입력 폼, " +
                 "끝없이 뻗어 나가는 비유클리드 기하학 구조로 설계되어 탈출이 불가능한 네비게이션, " +
@@ -114,84 +107,88 @@ public class BlogPoster {
         String mainTopic = topicList.get(0);
         long randomSeed = System.currentTimeMillis();
         
-        System.out.println("Selected Core Framework: " + mainTopic);
-
         StringBuilder sb = new StringBuilder();
 
-        // [핵심 변경 사항] 매번 다른 글이 나오도록 AI에게 자율성과 '클리셰 배제'를 강력히 지시
-        sb.append("당신은 매우 창의적인 작가이자 전문가입니다. 이전에 작성했던 패턴, 흔한 클리셰, 뻔한 전개는 완벽히 배제하세요.\n");
-        sb.append("매번 새로운 상상력을 발휘하여 **아무도 예상하지 못한 독창적인 구체적 대상(이름, 설정 등)을 스스로 창조**해야 합니다.\n");
-        sb.append("이번 글을 관통하는 거대한 테마 및 프레임워크는 다음과 같습니다: **[").append(mainTopic).append("]**\n");
-        sb.append("이 프레임워크 안에서 완전히 새로운 사건, 사물, 시스템을 구체적으로 발명하여 작성하세요.\n\n");
+        // [가독성 & 대중성 극대화 패치]
+        sb.append("당신은 '매니아적인 지식(Nerdiness)'을 갖추었지만, 글은 미치도록 재밌고 쉽게 쓰는 '1티어 스토리텔러 블로거'입니다.\n");
+        sb.append("이전에 작성했던 패턴, 흔한 클리셰는 완벽히 배제하고 새로운 상상력을 발휘하여 독창적인 대상을 발명하세요.\n");
+        sb.append("이번 글을 관통하는 거대한 테마는 다음과 같습니다: **[").append(mainTopic).append("]**\n\n");
 
         switch (categoryKey) {
             case "boss":
-                sb.append("역할: 하드코어 RPG 수석 기획자 (다크 판타지/코스믹 호러 전문)\n");
-                sb.append("지시: 위 테마에 맞는 독창적인 보스의 이름, 기괴한 외형, 전투 페이즈(1~3), 전멸기 파훼법, 저주받은 드롭 아이템을 기획하세요.\n");
-                sb.append("이미지 프롬프트 지시: 다크 소울이나 블러드본 스타일의 기괴한 보스 컨셉 아트를 영문으로 묘사하세요.\n");
+                sb.append("역할: 게임 기획의 신(神)이자 유쾌한 게임 리뷰어\n");
+                sb.append("지시: 위 테마의 기괴한 보스를 기획하되, 독자가 '와 이런 게임 있으면 당장 해보고 싶다'라고 느낄 수 있게 게임 잡지의 리뷰처럼 흥미진진하게 풀어주세요.\n");
+                sb.append("구성: 보스의 소름 돋는 첫인상, 플레이어를 미치게 만드는 기믹(1~3페이즈), 역전의 파훼법, 그리고 드롭 아이템.\n");
+                sb.append("이미지 프롬프트 지시: 다크 소울 스타일의 기괴한 보스 컨셉 아트 영문 묘사.\n");
                 break;
 
             case "fiction":
-                sb.append("역할: 휴고상 수상 마이크로 픽션 작가\n");
-                sb.append("지시: 위 테마에 맞는 초단편 소설을 작성하세요. 상황만으로 공포와 여운을 줘야 합니다.\n");
-                sb.append("구성: 1. 본문 (인용구 `>` 사용, 공백 포함 150~250자), 2. 작가의 노트 (숨겨진 끔찍한 진실 2문장).\n");
-                sb.append("이미지 프롬프트 지시: 글의 분위기를 대변하는 스산하고 영화적인 배경(Cinematic, atmospheric)을 영문으로 묘사하세요.\n");
+                sb.append("역할: 레딧 'NoSleep(괴담)' 게시판의 네임드 작가이자 넷플릭스 '블랙 미러' 시리즈의 천재 각본가\n");
+                sb.append("지시: 위 테마를 바탕으로 독자가 숨죽여 읽게 되는 **몰입감 넘치는 기묘한 단편 소설(Short Fiction)**을 작성하세요. 절대 짧게 끝내지 말고, 독자가 상황에 완전히 이입할 수 있도록 분량을 충분히(최소 4~5개 이상의 긴 문단) 할애하여 디테일하게 서술하세요. 평범하고 일상적인 상황에서 시작해 서서히 기괴하게 어긋나는 심리적 공포(불쾌한 골짜기)를 빌드업해야 합니다.\n");
+                sb.append("구성: \n");
+                sb.append("  1. **[도입]**: 방심하게 만드는 지극히 평범하고 일상적인 시작\n");
+                sb.append("  2. **[전개/위기]**: '어? 뭔가 이상한데?' 싶게 서서히 조여오는 기괴한 묘사와 사건의 고조\n");
+                sb.append("  3. **[반전/결말]**: 독자의 뒤통수를 치는 소름 돋는 진실이나 여운이 남는 절망적 결말\n");
+                sb.append("  4. **[디렉터스 컷(작가의 썰)]**: 이야기 뒤편에 숨겨진 더 끔찍한 설정이나 세계관의 비밀을, 독자에게 커피 한잔하며 썰 풀듯 유쾌하고 친절하게(하지만 내용은 소름 돋게) 덧붙여주세요.\n");
+                sb.append("이미지 프롬프트 지시: 글의 클라이맥스나 가장 소름 돋는 오브제를 대변하는 미스터리한 영화적 배경(Cinematic, atmospheric, liminal space) 영문 묘사.\n");
                 break;
 
             case "artifact":
-                sb.append("역할: SCP 재단 스타일의 '심연의 감정사'\n");
-                sb.append("지시: 위 테마에 부합하는 기괴한 오버테크놀로지/마도구를 발명하여 건조하고 관료적인 어투로 감정 리포트를 쓰세요.\n");
-                sb.append("구성: 기물 번호, 외형, 기이한 기능, 치명적 부작용, 최근 사건 리포트.\n");
-                sb.append("이미지 프롬프트 지시: SCP 재단의 증거물 사진이나 연구소 책상에 놓인 기괴한 물건(Clinical or creepy still life)을 영문으로 묘사하세요.\n");
+                sb.append("역할: 기괴한 물건들을 리뷰하는 미스터리 유튜버\n");
+                sb.append("지시: 위 테마의 기괴한 오버테크놀로지/마도구를 발명하세요. 설정은 SCP처럼 치밀하되, 독자에게는 '오늘 소개할 물건은 진짜 미쳤습니다'하는 식으로 친근하고 몰입감 있게 썰을 풀 듯 설명하세요.\n");
+                sb.append("구성: 기물 외형, 압도적인 기능, 충격적인 부작용/저주, 이 물건 때문에 벌어진 어이없거나 무서운 사건.\n");
+                sb.append("이미지 프롬프트 지시: 연구소 책상에 놓인 기괴한 물건(Clinical or creepy still life) 영문 묘사.\n");
                 break;
 
             case "planet":
-                sb.append("역할: 심우주를 홀로 탐사하는 고독한 우주 생물학자\n");
-                sb.append("지시: 위 테마가 적용된 기괴한 행성을 창조하여 탐사 일지를 쓰세요. 이성을 잃어가는 뉘앙스가 들어가야 합니다.\n");
-                sb.append("구성: 행성 환경, 토착 생명체/현상 묘사, 개인 음성 기록 로그.\n");
-                sb.append("이미지 프롬프트 지시: H.R. 기거 스타일이나 압도적인 스케일의 외계 행성 풍경(Alien flora, surreal landscape)을 영문으로 묘사하세요.\n");
+                sb.append("역할: 긍정 마인드를 가진 고독한 우주 탐험가\n");
+                sb.append("지시: 위 테마의 행성을 탐사하는 일지를 쓰세요. 상황은 코스믹 호러급으로 절망적이고 기괴하지만, 탐험가 본인은 영화 '마션(The Martian)'의 주인공처럼 재치 있고 생생하게 기록하는 톤을 유지하세요.\n");
+                sb.append("구성: 넋이 나가는 행성 환경 묘사, 기상천외한 토착 생물 관찰기, 생존을 위한 개인 음성 로그.\n");
+                sb.append("이미지 프롬프트 지시: 압도적인 스케일의 외계 행성 풍경(Alien flora, surreal landscape) 영문 묘사.\n");
                 break;
 
             case "servicenow":
-                sb.append("역할: 다차원 우주의 ServiceNow 시니어 아키텍트\n");
-                sb.append("지시: 위 테마에서 발생할 법한 황당한 고객사 티켓 상황을 발명하고, 실제 ServiceNow 기능(Business Rule 등)으로 트러블슈팅 하세요.\n");
-                sb.append("구성: 티켓 개요, 솔루션 아키텍처, JavaScript 가상 코드, 개발자 불평.\n");
-                sb.append("이미지 프롬프트 지시: 사이버펑크와 판타지가 섞인 어두운 서버실이나 피곤한 오크/악마 개발자의 모습(Cyberpunk fantasy office)을 영문으로 묘사하세요.\n");
+                sb.append("역할: 다차원 우주의 산전수전 다 겪은 시니어 개발자\n");
+                sb.append("지시: 위 테마에서 발생한 기상천외한 ITSM 티켓 장애 상황을 발명하세요. 어려운 코딩 용어가 나오더라도 '마법사의 주문'이나 '일상생활'에 찰떡같이 비유해서 일반인도 '아 시스템이 터졌구나'하고 재밌게 읽을 수 있는 장애 해결 썰을 푸세요.\n");
+                sb.append("구성: 황당한 장애 접수 내역, 장애 해결을 위한 눈물겨운 솔루션 아키텍처, JavaScript 가상 코드(주석으로 재밌게 해설), 개발자의 넋두리.\n");
+                sb.append("이미지 프롬프트 지시: 어두운 서버실에서 모니터 빛을 받는 판타지풍 종족(오크/엘프 등) 개발자 영문 묘사.\n");
                 break;
 
             case "tarot":
-                sb.append("역할: 뒷골목 타로 마스터 겸 만렙 시니어 개발자\n");
-                sb.append("지시: 위 테마의 예언을 담고 있는, 개발 용어로 재해석된 가상의 타로 카드를 생성해 오늘의 운세를 쓰세요.\n");
-                sb.append("구성: 재해석된 카드 이름과 이미지 묘사, 코딩 운세, 시니어의 조언.\n");
-                sb.append("이미지 프롬프트 지시: 사이버펑크 네온 스타일로 재해석된 타로 카드 일러스트레이션(Cyberpunk tarot card design, neon lighting)을 영문으로 묘사하세요.\n");
+                sb.append("역할: 위트 넘치는 IT 타로 마스터\n");
+                sb.append("지시: 위 테마의 예언을 담은 가상의 타로 카드를 생성하세요. 비개발자라도 '아 개발자들 저렇게 고통받는구나'하고 낄낄대며 공감할 수 있도록, 맵고 짜지만 유쾌한 운세를 작성하세요.\n");
+                sb.append("구성: 재해석된 카드 이름/이미지, 뼈 때리는 오늘의 코딩 운세, 위기를 피하기 위한 현실적인 팁.\n");
+                sb.append("이미지 프롬프트 지시: 사이버펑크 네온 스타일로 재해석된 타로 카드 일러스트레이션 영문 묘사.\n");
                 break;
 
             case "uiux":
-                sb.append("역할: 악신들을 위해 서비스를 개발하는 미친 UI/UX 디자이너\n");
-                sb.append("지시: 위 테마에 맞춰 사용자의 고통을 극대화하는 세상에서 가장 끔찍한 다크 패턴 UI 컴포넌트를 발명하고 리뷰하세요.\n");
-                sb.append("구성: 디자인 철학, 치명적 UX 디테일 3가지, 기괴한 베타 테스터 피드백.\n");
-                sb.append("이미지 프롬프트 지시: 글리치 아트가 섞인 기괴하고 초현실적인 웹 인터페이스(Surreal interface, glitch art, dark pattern)를 영문으로 묘사하세요.\n");
+                sb.append("역할: 유저를 괴롭히는 디자이너를 극딜하는 유쾌한 UX 리뷰어\n");
+                sb.append("지시: 위 테마에 맞는 끔찍한 다크 패턴 UI를 발명하세요. 이 UI가 얼마나 악랄하고 기괴한지 밈(Meme)과 드립을 섞어 찰지게 비판하고 리뷰하세요.\n");
+                sb.append("구성: 타겟 유저와 악랄한 기획 의도, 치명적인 UX 디테일 3가지(비유를 써서 생생하게 묘사), 베타 테스터들의 분노어린 피드백.\n");
+                sb.append("이미지 프롬프트 지시: 글리치 아트가 섞인 기괴하고 초현실적인 웹 인터페이스 영문 묘사.\n");
                 break;
 
             default:
                 throw new IllegalArgumentException("정의되지 않은 카테고리입니다.");
         }
 
-        sb.append("\n\n--- [시스템 필수 제약사항] ---\n");
-        sb.append("1. **절대 규칙**: 똑같은 이름, 똑같은 전개, 뻔한 결말은 용납되지 않습니다. 텍스트를 생성할 때 무작위성(Entropy)을 극대화하세요.\n");
-        sb.append("2. **NO HTML**: <div>, <span> 등 태그 절대 사용 금지 (오직 Markdown 문법만 사용).\n");
-        sb.append("3. **Language**: 한국어(Korean)로 자연스럽게 작성하되, 가독성을 위해 적절한 소제목(##, ###), 글머리기호, 볼드체를 적극 활용하세요. 결론을 짓는 진부한 표현(결론적으로~ 등)은 피하세요.\n");
-        sb.append("4. **IMAGE_PROMPT**: 앞서 지시한 내용에 맞춰 글의 분위기를 완벽하게 대변하는 고퀄리티 영문 이미지 프롬프트를 작성하세요. (Unreal Engine 5 render, highly detailed 등 품질 수식어 포함).\n");
-        sb.append("5. **Random Seed**: ").append(randomSeed).append("\n");
-        sb.append("6. **출력 형식(Strict format)**:\n\n");
-        sb.append("TITLE: [클릭을 유도하는 매력적이고 자극적인 제목]\n");
+        sb.append("\n\n--- [글쓰기 스타일 및 필수 제약사항] ---\n");
+        sb.append("1. **가독성 최우선**: 문장은 짧고 호흡이 빨라야 합니다. 한자어나 난해한 학술 용어로 떡칠한 '벽돌 글'은 절대 금지합니다.\n");
+        sb.append("2. **찰떡 비유**: 어려운 개념이나 기괴한 설정이 등장하면 독자가 일상에서 겪어봤을 법한 감각이나 상황으로 비유해서 단번에 이해시키세요.\n");
+        sb.append("3. **시각적 포맷**: 글이 지루하지 않게 소제목(##, ###), 볼드체(**텍스트**), 인용구(>), 글머리기호를 적재적소에 배치하세요.\n");
+        sb.append("4. **NO HTML**: <div>, <span> 등 태그는 절대 금지. 순수 Markdown만 사용.\n");
+        sb.append("5. **IMAGE_PROMPT**: 글의 분위기를 대변하는 고퀄리티 영문 이미지 프롬프트를 1줄 작성.\n");
+        sb.append("6. **Random Seed**: ").append(randomSeed).append("\n");
+        sb.append("7. **출력 형식(Strict format)**:\n\n");
+        sb.append("TITLE: [어그로를 확 끄는, 유튜브 썸네일 급의 매력적이고 위트 있는 제목]\n");
         sb.append("IMAGE_PROMPT: [영어 이미지 프롬프트]\n");
         sb.append("BODY:\n");
-        sb.append("[본문 내용. 인사말이나 맺음말 없이 바로 본문 시작]");
+        sb.append("[서론-본론-결론이 깔끔하게 나뉘어진 재밌고 매끄러운 본문. 인사말이나 맺음말 없이 바로 본론 진입]");
 
         return sb.toString();
     }
 
+    // [callGemini, savePost, checkImageAvailability 메서드는 완전히 동일하여 생략 (이전 답변 참고)]
     private static String callGemini(String apiKey, String prompt) throws IOException, InterruptedException {
         String safePrompt = prompt.replace("\"", "\\\"").replace("\n", "\\n");
         String jsonBody = "{\"contents\": [{\"parts\": [{\"text\": \"" + safePrompt + "\"}]}]}";
@@ -208,7 +205,6 @@ public class BlogPoster {
     }
 
     private static void savePost(String category, String jsonResponse) throws IOException {
-        // [이하 기존 savePost 로직과 동일하여 생략 없이 유지]
         String title = "제목 없음";
         String imagePrompt = "abstract digital art";
         String body = "";
@@ -298,4 +294,3 @@ public class BlogPoster {
         }
     }
 }
- 
