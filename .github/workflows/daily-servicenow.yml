@@ -1,8 +1,8 @@
-name: Daily Lore Post (05:00 UTC)
+name: Daily ServiceNow Post (23:00 UTC)
 
 on:
   schedule:
-    - cron: '0 5 * * *' # UTC 05:00 = KST 14:00
+    - cron: '0 23 * * *'
   workflow_dispatch:
 
 permissions:
@@ -24,12 +24,12 @@ jobs:
         env:
           GAK: ${{ secrets.GAK }}
         # 인자로 'lore'를 넘겨줍니다.
-        run: java generator/src/main/java/BlogPoster.java lore
+        run: java generator/src/main/java/BlogPoster.java servicenow
 
       - name: Commit and Push
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add _posts/
-          git commit -m "Auto-post: New World Lore" || echo "No changes"
+          git commit -m "Auto-post: Service Now Contents" || echo "No changes"
           git push
