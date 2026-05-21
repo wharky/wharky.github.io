@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class BlogPoster {
 
-    private static final String API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent";
+    private static final String API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash:generateContent";
 
     // -------------------------------------------------------------------
     // [설정 영역] 세계관 프레임워크 (이전과 동일)
