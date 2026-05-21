@@ -9,45 +9,61 @@ entries:
       #  url: https://github.com/wharky/wharky.github.io
       # - title: "used by <a href='https://riggraz.dev'>riggraz.dev</a> and <a href='https://github.com/riggraz/no-style-please/network/dependents'>many others</a>"
 
-  - title: tech
+  - title: tarot
     post_list:
-      category: tech
+      category: tarot
       limit: 5
       show_more: true
       show_more_text: See more posts..
-      show_more_url: archive-tech.html
+      show_more_url: archive-tarot.html
 
-  - title: art
+  - title: fiction
     post_list:
-      category: art
+      category: fiction
       limit: 5
       show_more: true
       show_more_text: See more posts..
-      show_more_url: archive-art.html
+      show_more_url: archive-fiction.html
 
-  - title: lore
+  - title: uiux
     post_list:
-      category: lore
+      category: uiux
       limit: 5
       show_more: true
       show_more_text: See more posts..
-      show_more_url: archive-lore.html
+      show_more_url: archive-uiux.html
 
-  - title: game
+  - title: servicenow
     post_list:
-      category: game
+      category: servicenow
       limit: 5
       show_more: true
       show_more_text: See more posts..
-      show_more_url: archive-game.html
+      show_more_url: archive-servicenow.html
 
-  - title: story
+  - title: planet
     post_list:
-      category: story
+      category: planet
       limit: 5
       show_more: true
       show_more_text: See more posts..
-      show_more_url: archive-story.html
+      show_more_url: archive-planet.html
+
+  - title: artifact
+    post_list:
+      category: artifact
+      limit: 5
+      show_more: true
+      show_more_text: See more posts..
+      show_more_url: archive-artifact.html
+
+  - title: boss
+    post_list:
+      category: boss
+      limit: 5
+      show_more: true
+      show_more_text: See more posts..
+      show_more_url: archive-boss.html
       
   - title: all posts
     post_list:
